@@ -1,0 +1,759 @@
+<title>أعمدة الأثر</title>
+<meta name="description" content="لوحة تفاعلية لورقة العمل القيادية للثانوية الخامسة بسكاكا: الأرقام، المراكز التنافسية، ومبادرات التميز">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --ink:#182A20;
+    --ink-soft:#4B5D51;
+    --ink-faint:#8A9787;
+    --sand:#F6EFDD;
+    --sand-deep:#EDE0BE;
+    --paper:#FFFCF4;
+    --forest:#0B4A32;
+    --forest-2:#146C43;
+    --forest-tint:#E4EFE7;
+    --gold:#B8892B;
+    --gold-deep:#8C6620;
+    --gold-tint:#F7ECD2;
+    --line:#E1D3AC;
+    --lvl-high:#1E8449;
+    --lvl-med:#2E86C1;
+    --lvl-low:#E67E22;
+    --lvl-vlow:#C0392B;
+    --shadow-lg: 0 30px 60px -30px rgba(11,74,50,.45);
+    --shadow-sm: 0 10px 24px -18px rgba(11,74,50,.4);
+    --radius: 20px;
+  }
+
+  *{box-sizing:border-box;}
+  html{scroll-behavior:smooth;}
+  @media (prefers-reduced-motion: reduce){
+    html{scroll-behavior:auto;}
+    *{animation-duration:.01ms !important; animation-iteration-count:1 !important; transition-duration:.01ms !important; scroll-behavior:auto !important;}
+  }
+
+  body{
+    margin:0;
+    background:var(--sand);
+    color:var(--ink);
+    font-family:'Tajawal', 'Segoe UI', Tahoma, sans-serif;
+    direction:rtl;
+    padding:0 0;
+    -webkit-font-smoothing:antialiased;
+  }
+
+  h1,h2,h3,.display{
+    font-family:'El Messiri','Tajawal',sans-serif;
+    text-wrap:balance;
+    margin:0;
+    color:var(--forest);
+  }
+
+  p{line-height:1.9; color:var(--ink-soft); margin:0;}
+  .num{font-variant-numeric:tabular-nums; direction:ltr; unicode-bidi:isolate;}
+  /* Purely decorative entrance pop for .cu figures - never mutates the digits,
+     so the value is correct even mid-transition, in a static capture, or with
+     JS disabled (this rule is inert without the .num-pop class from JS). */
+  .num-pop{display:inline-block; transform:scale(.8); opacity:.5; transition:transform .45s cubic-bezier(.2,.7,.3,1), opacity .45s ease;}
+  .num-pop.popped{transform:scale(1); opacity:1;}
+
+  a{color:inherit;}
+  button{font-family:inherit; cursor:pointer;}
+
+  .wrap{max-width:1180px; margin:0 auto; padding-inline:24px;}
+
+  /* ---------- progress bar ---------- */
+  #scrollProgress{
+    position:fixed; inset-inline:0; top:0; height:3px; width:0%;
+    background:linear-gradient(90deg, var(--gold), var(--forest-2));
+    z-index:100; transition:width .1s linear;
+  }
+
+  /* ---------- top bar ---------- */
+  .topbar{
+    position:sticky; top:0; z-index:60;
+    background:rgba(246,239,221,.9);
+    backdrop-filter:blur(10px);
+    border-bottom:1px solid var(--line);
+  }
+  .topbar-inner{
+    max-width:1180px; margin:0 auto; padding:14px 24px;
+    display:flex; align-items:center; justify-content:space-between; gap:20px;
+  }
+  .brand{display:flex; flex-direction:column; gap:2px; min-width:0;}
+  .brand-kicker{font-size:.7rem; color:var(--ink-faint); letter-spacing:.02em;}
+  .brand-name{font-family:'El Messiri',sans-serif; font-weight:700; color:var(--forest); font-size:1.05rem;}
+  .quicknav{display:flex; align-items:center; gap:22px; font-size:.92rem; font-weight:500;}
+  .quicknav a{color:var(--ink-soft); text-decoration:none; padding-block:4px; border-bottom:2px solid transparent; transition:color .2s, border-color .2s;}
+  .quicknav a:hover, .quicknav a.active{color:var(--forest); border-color:var(--gold);}
+  .nav-cta{
+    background:var(--forest); color:var(--paper); border:none; border-radius:999px;
+    padding:10px 20px; font-size:.88rem; font-weight:700; box-shadow:var(--shadow-sm);
+    transition:transform .2s, background .2s;
+  }
+  .nav-cta:hover{background:var(--forest-2); transform:translateY(-1px);}
+  .menu-toggle{display:none; background:none; border:none; font-size:1.4rem; color:var(--forest);}
+
+  @media (max-width:760px){
+    .quicknav a{display:none;}
+    .menu-toggle{display:block;}
+  }
+
+  /* ---------- hero ---------- */
+  .hero{
+    position:relative; overflow:hidden;
+    padding:64px 0 72px;
+    background:
+      radial-gradient(1100px 480px at 85% -10%, var(--gold-tint) 0%, transparent 60%),
+      radial-gradient(900px 500px at -10% 110%, var(--forest-tint) 0%, transparent 55%),
+      var(--sand);
+  }
+  .stelae{position:absolute; inset:0; z-index:0; opacity:.5; pointer-events:none;}
+  .hero-inner{position:relative; z-index:1; max-width:900px; margin:0 auto; padding-inline:24px; text-align:center;}
+  .eyebrow{
+    display:inline-flex; align-items:center; gap:8px;
+    font-size:.82rem; font-weight:700; color:var(--gold-deep);
+    background:var(--gold-tint); border:1px solid #E8D6A0;
+    padding:7px 16px; border-radius:999px; margin-bottom:22px;
+  }
+  .eyebrow::before{content:'◆'; font-size:.6rem; color:var(--gold);}
+  h1.hero-title{
+    font-size:clamp(2rem, 4.6vw, 3.1rem); font-weight:700; line-height:1.28;
+    color:var(--forest); margin-bottom:18px;
+  }
+  h1.hero-title em{
+    font-style:normal; color:var(--gold-deep);
+    background:linear-gradient(180deg, transparent 62%, var(--gold-tint) 62%);
+  }
+  .hero-sub{font-size:1.08rem; max-width:640px; margin:0 auto 30px;}
+  .meta-row{display:flex; flex-wrap:wrap; justify-content:center; gap:10px; margin-bottom:44px;}
+  .meta-chip{
+    display:flex; align-items:center; gap:8px;
+    background:var(--paper); border:1px solid var(--line); border-radius:12px;
+    padding:9px 16px; font-size:.85rem; color:var(--ink-soft); box-shadow:var(--shadow-sm);
+  }
+  .meta-chip b{color:var(--forest); font-weight:700;}
+
+  .teaser-grid{
+    display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:38px;
+  }
+  @media (max-width:820px){.teaser-grid{grid-template-columns:repeat(2,1fr);}}
+  .teaser{
+    background:var(--paper); border:1px solid var(--line); border-radius:16px;
+    padding:20px 14px; box-shadow:var(--shadow-sm);
+    transform:translateY(0); opacity:1; transition:transform .6s ease, opacity .6s ease;
+  }
+  .teaser.pre{transform:translateY(14px); opacity:0;}
+  .teaser .t-num{font-family:'El Messiri',sans-serif; font-size:1.9rem; font-weight:700; color:var(--forest);}
+  .teaser .t-num small{font-size:1rem; font-weight:600; color:var(--gold-deep);}
+  .teaser .t-label{font-size:.78rem; color:var(--ink-faint); margin-top:4px; font-weight:500;}
+
+  .scroll-cue{
+    display:inline-flex; align-items:center; gap:8px; text-decoration:none;
+    font-weight:700; color:var(--forest); font-size:.95rem;
+    border-bottom:2px solid var(--gold); padding-bottom:4px;
+  }
+  .scroll-cue span{display:inline-block; animation:bob 1.6s ease-in-out infinite;}
+  @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
+
+  /* ---------- sections ---------- */
+  .section{padding:76px 0;}
+  .section-kicker{
+    font-size:.8rem; font-weight:700; color:var(--gold-deep); letter-spacing:.02em; margin-bottom:10px; display:block;
+  }
+  .section-title{font-size:clamp(1.5rem,2.6vw,2.1rem); margin-bottom:14px;}
+  .section-lede{max-width:680px; font-size:1.02rem; margin-bottom:44px;}
+
+  .reveal{opacity:1; transform:translateY(0); transition:opacity .7s ease, transform .7s ease;}
+  .reveal.pre{opacity:0; transform:translateY(22px);}
+
+  /* ---------- stat grid ---------- */
+  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:52px;}
+  @media (max-width:960px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:520px){.stat-grid{grid-template-columns:1fr;}}
+  .stat-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px 22px; box-shadow:var(--shadow-sm); position:relative; overflow:hidden;
+  }
+  .stat-card::before{
+    content:''; position:absolute; inset-inline-start:0; top:0; bottom:0; width:5px;
+    background:var(--bar-color, var(--forest));
+  }
+  .stat-card .s-kicker{font-size:.78rem; font-weight:700; color:var(--ink-faint); margin-bottom:10px; display:block;}
+  .stat-card .s-num{font-family:'El Messiri',sans-serif; font-size:2.5rem; font-weight:700; color:var(--forest); line-height:1;}
+  .stat-card .s-unit{font-size:1.1rem; font-weight:600; color:var(--ink-faint);}
+  .stat-card .s-delta{
+    display:inline-flex; align-items:center; gap:4px; margin-top:12px;
+    background:var(--forest-tint); color:var(--forest); font-weight:700; font-size:.82rem;
+    padding:4px 10px; border-radius:999px;
+  }
+  .stat-card .s-foot{font-size:.85rem; color:var(--ink-soft); margin-top:12px;}
+
+  /* ---------- chart ---------- */
+  .chart-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:30px 28px; box-shadow:var(--shadow-sm); margin-bottom:36px;
+  }
+  .chart-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:6px;}
+  .chart-head h3{font-size:1.15rem;}
+  .legend{display:flex; gap:18px; flex-wrap:wrap; font-size:.85rem; color:var(--ink-soft);}
+  .legend span{display:inline-flex; align-items:center; gap:7px;}
+  .swatch{width:12px; height:12px; border-radius:4px; display:inline-block;}
+  #trendChart{width:100%; height:auto; display:block; margin-top:14px;}
+  .bar-val{font-family:'El Messiri',sans-serif; font-weight:700; font-size:12.5px; fill:var(--ink);}
+  .axis-label{font-size:12px; fill:var(--ink-faint); font-family:'Tajawal',sans-serif;}
+  .gridline{stroke:var(--line); stroke-width:1;}
+  .chart-tip{
+    position:absolute; pointer-events:none; background:var(--forest); color:#fff;
+    font-size:.78rem; padding:6px 10px; border-radius:8px; transform:translate(-50%,-115%);
+    opacity:0; transition:opacity .12s ease; white-space:nowrap; z-index:5;
+  }
+  .chart-wrap{position:relative;}
+
+  /* ---------- distribution ---------- */
+  .dist-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
+  @media (max-width:760px){.dist-grid{grid-template-columns:1fr;}}
+  .dist-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:24px 26px; box-shadow:var(--shadow-sm);}
+  .dist-card h4{font-size:1rem; color:var(--forest); margin-bottom:14px; font-family:'Tajawal',sans-serif; font-weight:700;}
+  .dist-bar{display:flex; height:34px; border-radius:10px; overflow:hidden; margin-bottom:12px; border:1px solid var(--line);}
+  .dist-seg{display:flex; align-items:center; justify-content:center; color:#fff; font-size:.72rem; font-weight:700; min-width:0;}
+  .dist-legend{display:flex; flex-wrap:wrap; gap:12px 16px; font-size:.78rem; color:var(--ink-soft);}
+  .dist-legend span{display:inline-flex; align-items:center; gap:6px;}
+
+  /* ---------- story ---------- */
+  .story-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:22px; align-items:start;}
+  @media (max-width:900px){.story-grid{grid-template-columns:1fr;}}
+  .init-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:30px 28px; box-shadow:var(--shadow-sm);
+  }
+  .init-card .init-tag{
+    display:inline-block; font-size:.78rem; font-weight:700; color:var(--forest);
+    background:var(--forest-tint); padding:5px 12px; border-radius:999px; margin-bottom:14px;
+  }
+  .init-card h3{font-size:1.3rem; margin-bottom:12px;}
+  .init-card p{margin-bottom:18px;}
+
+  .feature-list{display:flex; flex-direction:column; gap:10px;}
+  .feature-item{border:1px solid var(--line); border-radius:14px; background:var(--sand); overflow:hidden;}
+  .feature-btn{
+    width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px;
+    background:none; border:none; padding:14px 16px; text-align:right; font-weight:700; color:var(--forest); font-size:.95rem;
+  }
+  .feature-btn .fi-num{
+    display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%;
+    background:var(--forest); color:#fff; font-size:.78rem; margin-inline-end:10px; flex:none;
+  }
+  .feature-btn .fi-chevron{transition:transform .25s ease; color:var(--gold-deep); flex:none;}
+  .feature-item.open .fi-chevron{transform:rotate(180deg);}
+  .feature-body{max-height:0; overflow:hidden; transition:max-height .3s ease;}
+  .feature-body p{padding:0 16px 16px 52px; font-size:.9rem;}
+  .feature-item.open .feature-body{max-height:200px;}
+
+  .raez-stats{display:grid; grid-template-columns:1fr 1fr; gap:12px; margin-top:6px; margin-bottom:18px;}
+  .raez-tile{background:var(--sand); border:1px solid var(--line); border-radius:14px; padding:16px; text-align:center;}
+  .raez-tile .r-num{font-family:'El Messiri',sans-serif; font-weight:700; font-size:1.7rem; color:var(--gold-deep);}
+  .raez-tile .r-label{font-size:.76rem; color:var(--ink-soft); margin-top:4px;}
+  .raez-chip{
+    display:inline-flex; align-items:center; gap:8px; background:var(--forest-tint); color:var(--forest);
+    font-weight:700; font-size:.82rem; padding:8px 14px; border-radius:999px;
+  }
+
+  .impact-callout{
+    background:linear-gradient(135deg, var(--forest) 0%, #0E5B3E 100%);
+    color:#F3EFDF; border-radius:var(--radius); padding:26px 28px; margin-top:26px;
+    box-shadow:var(--shadow-lg);
+  }
+  .impact-callout p{color:#DCE8DF; margin:0;}
+  .impact-callout strong{color:#F6D98C;}
+
+  /* ---------- footer ---------- */
+  .site-footer{
+    background:var(--forest); color:#E7EFE8; padding:52px 0 34px; margin-top:20px;
+  }
+  .footer-inner{display:flex; flex-wrap:wrap; justify-content:space-between; gap:28px;}
+  .tagline{font-family:'El Messiri',sans-serif; font-size:1.4rem; color:var(--gold-tint); font-weight:600;}
+  .signs{display:flex; gap:36px; flex-wrap:wrap;}
+  .sign b{display:block; color:#fff; font-size:.98rem; margin-bottom:3px;}
+  .sign span{font-size:.82rem; color:#B9CBBD;}
+  .footer-note{margin-top:30px; padding-top:20px; border-top:1px solid rgba(255,255,255,.15); font-size:.78rem; color:#9FB6A5;}
+
+  /* ---------- modal ---------- */
+  .modal-overlay{
+    position:fixed; inset:0; background:rgba(12,26,19,.55); backdrop-filter:blur(3px);
+    display:flex; align-items:center; justify-content:center; padding:24px; z-index:200;
+    opacity:0; pointer-events:none; transition:opacity .25s ease;
+  }
+  .modal-overlay.open{opacity:1; pointer-events:auto;}
+  .modal{
+    background:var(--paper); border-radius:22px; max-width:720px; width:100%;
+    max-height:85vh; overflow-y:auto; padding:34px 32px; position:relative;
+    box-shadow:0 40px 80px -20px rgba(0,0,0,.4);
+    transform:translateY(16px) scale(.98); transition:transform .25s ease;
+  }
+  .modal-overlay.open .modal{transform:translateY(0) scale(1);}
+  .modal-close{
+    position:absolute; top:18px; left:18px; width:36px; height:36px; border-radius:50%;
+    border:1px solid var(--line); background:var(--sand); color:var(--forest); font-size:1rem;
+  }
+  .modal h2{font-size:1.4rem; margin-bottom:6px; padding-inline-end:44px;}
+  .modal .modal-sub{margin-bottom:22px; font-size:.92rem;}
+  .recs-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;}
+  .recs-list li{
+    display:flex; gap:14px; align-items:flex-start; background:var(--sand);
+    border:1px solid var(--line); border-radius:14px; padding:14px 16px;
+  }
+  .recs-list .r-index{
+    flex:none; width:30px; height:30px; border-radius:50%; background:var(--gold); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-family:'El Messiri',sans-serif;
+  }
+  .recs-list p{font-size:.92rem; color:var(--ink);}
+
+  ::selection{background:var(--gold-tint); color:var(--forest);}
+</style>
+
+<div id="scrollProgress"></div>
+
+<header class="topbar">
+  <div class="topbar-inner">
+    <div class="brand">
+      <span class="brand-kicker">وزارة التعليم · الإدارة العامة للتعليم بمنطقة الجوف</span>
+      <span class="brand-name">الثانوية الخامسة بسكاكا</span>
+    </div>
+    <nav class="quicknav" id="quicknav">
+      <a href="#intro" data-sec="intro">المقدمة</a>
+      <a href="#numbers" data-sec="numbers">لغة الأرقام</a>
+      <a href="#story" data-sec="story">قصة النجاح</a>
+      <button class="nav-cta" data-open-recs>التوصيات الاستراتيجية</button>
+    </nav>
+    <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
+  </div>
+</header>
+
+<main>
+  <section id="intro" class="hero">
+    <svg class="stelae" viewBox="0 0 1200 500" preserveAspectRatio="xMidYMax slice" aria-hidden="true">
+      <g fill="#0B4A32" opacity="0.06">
+        <rect x="60" y="230" width="26" height="270" rx="4"/>
+        <rect x="150" y="180" width="30" height="320" rx="4"/>
+        <rect x="250" y="260" width="22" height="240" rx="4"/>
+        <rect x="960" y="200" width="28" height="300" rx="4"/>
+        <rect x="1050" y="250" width="24" height="250" rx="4"/>
+        <rect x="1130" y="170" width="30" height="330" rx="4"/>
+      </g>
+      <g fill="#B8892B" opacity="0.08">
+        <rect x="110" y="300" width="18" height="200" rx="4"/>
+        <rect x="1000" y="320" width="18" height="180" rx="4"/>
+      </g>
+    </svg>
+    <div class="hero-inner">
+      <span class="eyebrow">ورقة عمل قيادية · لقاء قادة مدارس منطقة الجوف</span>
+      <h1 class="hero-title">حين تتحول <em>البيانات</em> إلى قرار، والقرار إلى أثر</h1>
+      <p class="hero-sub">قصة الثانوية الخامسة بسكاكا (مسارات) في بناء نموذج قيادة مدرسية مبني على البيانات، حقّق نموًا مضطردًا في نتائج التحصيلي والقدرات، ومركزًا تنافسيًا متقدمًا على مستوى منطقة الجوف والمملكة، وفق مستهدفات رؤية المملكة العربية السعودية 2030.</p>
+      <div class="meta-row">
+        <span class="meta-chip">مديرة المدرسة: <b>رغدة الزارع</b></span>
+        <span class="meta-chip">الرقم الوزاري: <b class="num">M3985137</b></span>
+        <span class="meta-chip">العام الدراسي: <b class="num">1447/1448هـ</b></span>
+      </div>
+      <div class="teaser-grid" id="teaserGrid">
+        <div class="teaser"><div class="t-num"><span class="cu num" data-target="70.9" data-decimals="1">70.9</span></div><div class="t-label">متوسط التحصيلي 1447هـ</div></div>
+        <div class="teaser"><div class="t-num"><span class="cu num" data-target="69.3" data-decimals="1">69.3</span></div><div class="t-label">متوسط القدرات 1447هـ</div></div>
+        <div class="teaser"><div class="t-num"><small>المرتبة</small> <span class="cu num" data-target="1" data-decimals="0">1</span></div><div class="t-label">على إدارة التعليم بالجوف - تحصيلي</div></div>
+        <div class="teaser"><div class="t-num"><span class="cu num" data-target="28" data-decimals="0">28</span>%</div><div class="t-label">نمو تحصيلي عبر منصة رائز المعرفة</div></div>
+      </div>
+      <a class="scroll-cue" href="#numbers">استعرض لغة الأرقام <span>↓</span></a>
+    </div>
+  </section>
+
+  <section id="numbers" class="section numbers-section">
+    <div class="wrap">
+      <span class="section-kicker reveal">لغة الأرقام</span>
+      <h2 class="section-title reveal">النتائج والمراكز التنافسية لعام 1447/1448هـ</h2>
+      <p class="section-lede reveal">قراءة رقمية موثقة لأداء طالبات المدرسة في اختباري التحصيلي والقدرات العامة (المسار العلمي)، مقارنة بمستوى إدارة التعليم بمنطقة الجوف والمملكة العربية السعودية.</p>
+
+      <div class="stat-grid">
+        <div class="stat-card reveal" style="--bar-color:var(--forest-2)">
+          <span class="s-kicker">التحصيلي - المسار العلمي</span>
+          <div class="s-num"><span class="cu num" data-target="70.9" data-decimals="1">70.9</span></div>
+          <span class="s-delta">▲ <span class="num">+0.96</span> نقطة عن 1446هـ</span>
+          <p class="s-foot">بمشاركة <b class="num">259</b> طالبة</p>
+        </div>
+        <div class="stat-card reveal" style="--bar-color:var(--gold)">
+          <span class="s-kicker">القدرات العامة - المسار العلمي</span>
+          <div class="s-num"><span class="cu num" data-target="69.3" data-decimals="1">69.3</span></div>
+          <span class="s-delta">▲ <span class="num">+1.38</span> نقطة عن 1446هـ</span>
+          <p class="s-foot">بمشاركة <b class="num">276</b> طالبة</p>
+        </div>
+        <div class="stat-card reveal" style="--bar-color:var(--forest-2)">
+          <span class="s-kicker">الترتيب - التحصيلي</span>
+          <div class="s-num">المرتبة <span class="cu num" data-target="1" data-decimals="0">1</span></div>
+          <p class="s-foot">من <b class="num">63</b> مدرسة بإدارة التعليم (100%)<br>أعلى من <b class="num">79.97%</b> من مدارس المملكة</p>
+        </div>
+        <div class="stat-card reveal" style="--bar-color:var(--gold)">
+          <span class="s-kicker">الترتيب - القدرات</span>
+          <div class="s-num">المرتبة <span class="cu num" data-target="3" data-decimals="0">3</span></div>
+          <p class="s-foot">من <b class="num">64</b> مدرسة بإدارة التعليم (96.83%)<br>أعلى من <b class="num">74.29%</b> من مدارس المملكة</p>
+        </div>
+      </div>
+
+      <div class="chart-card reveal">
+        <div class="chart-head">
+          <h3>المسار الزمني لمتوسط الدرجات (1444هـ - 1447هـ)</h3>
+          <div class="legend">
+            <span><i class="swatch" style="background:var(--forest-2)"></i>التحصيلي</span>
+            <span><i class="swatch" style="background:var(--gold)"></i>القدرات العامة</span>
+          </div>
+        </div>
+        <div class="chart-wrap">
+          <svg id="trendChart" viewBox="0 0 920 320" role="img" aria-label="مخطط يوضح تطور متوسط درجات التحصيلي والقدرات من عام 1444 إلى 1447 هـ"></svg>
+          <div class="chart-tip" id="chartTip"></div>
+        </div>
+      </div>
+
+      <div class="dist-grid">
+        <div class="dist-card reveal">
+          <h4>توزيع الطالبات على مستويات الأداء - التحصيلي</h4>
+          <div class="dist-bar" id="distTahsili"></div>
+          <div class="dist-legend" id="distTahsiliLegend"></div>
+        </div>
+        <div class="dist-card reveal">
+          <h4>توزيع الطالبات على مستويات الأداء - القدرات</h4>
+          <div class="dist-bar" id="distQudurat"></div>
+          <div class="dist-legend" id="distQuduratLegend"></div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="story" class="section story-section">
+    <div class="wrap">
+      <span class="section-kicker reveal">هندسة الأثر الميداني</span>
+      <h2 class="section-title reveal">قصة النجاح والمبادرات</h2>
+      <p class="section-lede reveal">من التحليل الرقمي إلى الممارسة اليومية داخل الصف: مبادرة ميدانية تشاركية، وتوظيف رقمي حوّل البيانات إلى أثر تحصيلي مقاس.</p>
+
+      <div class="story-grid">
+        <div class="init-card reveal">
+          <span class="init-tag">مبادرة ميدانية</span>
+          <h3>بصمة نجاح</h3>
+          <p>ذراع تنفيذية ميدانية ترجمت نتائج التحليل إلى ممارسات يومية داخل الصف، عبر حزمة من الحلول الابتكارية جمعت بين البعدين المعرفي والنفسي في إعداد الطالبة للاختبار. اضغطي على كل عنصر لعرض تفاصيله:</p>
+          <div class="feature-list" id="featureList">
+            <div class="feature-item">
+              <button class="feature-btn"><span><span class="fi-num">١</span>التدريب الموجّه بالبيانات</span><span class="fi-chevron">˅</span></button>
+              <div class="feature-body"><p>بناء الحصص التقويمية والعلاجية على نتائج كل طالبة ومهاراتها الفرعية تحديدًا، بدلًا من التدريب الجماعي العام غير الموجّه.</p></div>
+            </div>
+            <div class="feature-item">
+              <button class="feature-btn"><span><span class="fi-num">٢</span>استراتيجية المعلم البديل</span><span class="fi-chevron">˅</span></button>
+              <div class="feature-body"><p>تناوب مقصود بين المعلمات على تدريس المهارة الواحدة، بما يتيح للطالبة زاوية شرح مختلفة تعالج فجوتها من مسار جديد.</p></div>
+            </div>
+            <div class="feature-item">
+              <button class="feature-btn"><span><span class="fi-num">٣</span>المحاكاة الواقعية للاختبارات</span><span class="fi-chevron">˅</span></button>
+              <div class="feature-body"><p>تطبيق اختبارات محاكية لظروف الاختبار الفعلي زمنًا ونمط أسئلة وبيئة قاعة، لرفع جاهزية الطالبات الفعلية لا النظرية فقط.</p></div>
+            </div>
+            <div class="feature-item">
+              <button class="feature-btn"><span><span class="fi-num">٤</span>اللياقة النفسية</span><span class="fi-chevron">˅</span></button>
+              <div class="feature-body"><p>برامج موجّهة لتعزيز الثبات الانفعالي وإدارة قلق الاختبار، بما ينعكس أداءً مستقرًا وقت التطبيق الفعلي.</p></div>
+            </div>
+          </div>
+        </div>
+
+        <div class="init-card reveal">
+          <span class="init-tag">توظيف رقمي</span>
+          <h3>منصة رائز المعرفة</h3>
+          <p>أداة تحليلية رقمية حوّلت نتائج التحصيلي والقدرات إلى خطط علاجية فردية دقيقة لكل طالبة، فأثمر هذا التوظيف أثرًا تحصيليًا فعليًا تجاوز المستهدف المعتمد.</p>
+          <div class="raez-stats">
+            <div class="raez-tile"><div class="r-num"><span class="cu num" data-target="28" data-decimals="0">28</span>%</div><div class="r-label">نمو تحصيلي فعلي</div></div>
+            <div class="raez-tile"><div class="r-num">↓<span class="cu num" data-target="30" data-decimals="0">30</span>%</div><div class="r-label">انخفاض زمن الإجابة</div></div>
+          </div>
+          <span class="raez-chip">◆ تجاوز المستهدف البالغ 20% بفارق واضح</span>
+          <div class="impact-callout">
+            <p>سجّلت مؤشرات التفاعل الرقمي للطالبات مع محتوى المنصة <strong>ارتفاعًا ملحوظًا</strong> خلال فترة التطبيق، وانخفض زمن الإجابة نتيجة تحسّن <strong>الطلاقة المهارية</strong> وسرعة الاسترجاع المعرفي، لا على حساب الدقة.</p>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal" style="text-align:center; margin-top:44px;">
+        <button class="nav-cta" data-open-recs style="padding:14px 30px; font-size:.95rem;">عرض التوصيات الاستراتيجية القابلة للتعميم ←</button>
+      </div>
+    </div>
+  </section>
+
+  <footer class="site-footer">
+    <div class="wrap footer-inner">
+      <div>
+        <div class="tagline">"نحو أداء تحصيلي متميز"</div>
+        <p style="color:#B9CBBD; margin-top:10px; max-width:420px;">وفق مستهدفات رؤية المملكة العربية السعودية 2030 في التنمية البشرية وجودة التعليم.</p>
+      </div>
+      <div class="signs">
+        <div class="sign"><b>رغدة الزارع</b><span>مديرة المدرسة</span></div>
+      </div>
+    </div>
+    <div class="wrap footer-note">المملكة العربية السعودية · وزارة التعليم · الإدارة العامة للتعليم بمنطقة الجوف · الثانوية الخامسة للبنات بسكاكا (مسارات) · الرقم الوزاري M3985137</div>
+  </footer>
+</main>
+
+<div class="modal-overlay" id="recsOverlay">
+  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="recsTitle" tabindex="-1">
+    <button class="modal-close" id="closeRecs" aria-label="إغلاق">✕</button>
+    <h2 id="recsTitle">التوصيات الاستراتيجية القابلة للتعميم</h2>
+    <p class="modal-sub">مقترحة للتعميم على مدارس منطقة الجوف، استنادًا إلى نموذج العمل المطبَّق في الثانوية الخامسة بسكاكا.</p>
+    <ol class="recs-list">
+      <li><span class="r-index num">1</span><p>اعتماد آلية دورية ثابتة لتحليل بطاقتي التحصيلي والقدرات مع فرق العمل المدرسية، وربطها بلقاء تحليلي دوري مع مشرفي وحدة دعم التميز، بدلًا من الاكتفاء بالتحليل بعد صدور النتائج فقط.</p></li>
+      <li><span class="r-index num">2</span><p>الانتقال من قراءة المتوسط العام إلى تحليل المجالات والمهارات الفرعية في كل اختبار، باعتباره الأساس العلمي لبناء خطط معالجة وإثراء دقيقة وموجّهة.</p></li>
+      <li><span class="r-index num">3</span><p>تصميم مسارين متوازيين وواضحين في كل مدرسة: مسار علاجي فردي للطالبات في المستويين المنخفض والمنخفض جدًا وفق نتائج كل طالبة، ومسار إثرائي للطالبات في المستوى المرتفع لتحويل التميز إلى تفوق.</p></li>
+      <li><span class="r-index num">4</span><p>تبني هدف مؤسسي صريح لرفع نسبة الطالبات المتجاوزات لمتوسط الاختبار العام في كلا الاختبارين، واعتماده كمؤشر أداء رئيس يُتابَع سنويًا.</p></li>
+      <li><span class="r-index num">5</span><p>تعزيز منظومة التحفيز والتكريم ونشر ثقافة التميز داخل البيئة المدرسية، باعتبارها رافعة أساسية لمعالجة ضعف الدافعية لدى الطالبات.</p></li>
+      <li><span class="r-index num">6</span><p>تفعيل برامج تبادل الخبرات بين المعلمات داخل المدرسة وبين مدارس المنطقة، وتوظيف المنصات التعليمية والموارد الرقمية في الاستعداد للاختبارات الوطنية.</p></li>
+      <li><span class="r-index num">7</span><p>اعتماد لوحة مؤشرات كمية ثابتة على مستوى إدارة التعليم لمتابعة أداء المدارس، تشمل: متوسط المدرسة، معدل التغير السنوي، نسبة المستوى المرتفع، نسبة المستوى المنخفض جدًا، ونسبة الطالبات فوق متوسط الاختبار، بما يتيح مقارنة موضوعية ومتابعة مستمرة للأثر.</p></li>
+    </ol>
+  </div>
+</div>
+
+<script>
+(function(){
+  "use strict";
+  var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+  /* ---------- scroll progress ---------- */
+  var progressEl = document.getElementById('scrollProgress');
+  function onScroll(){
+    var h = document.documentElement;
+    var scrolled = (h.scrollTop) / (h.scrollHeight - h.clientHeight) * 100;
+    progressEl.style.width = (scrolled || 0) + '%';
+  }
+  document.addEventListener('scroll', onScroll, {passive:true});
+  onScroll();
+
+  /* ---------- active nav link ---------- */
+  var navLinks = Array.prototype.slice.call(document.querySelectorAll('.quicknav a'));
+  var sections = navLinks.map(function(a){ return document.getElementById(a.dataset.sec); });
+  function updateActive(){
+    var pos = window.scrollY + 140;
+    var current = sections[0];
+    sections.forEach(function(sec){ if(sec && sec.offsetTop <= pos) current = sec; });
+    navLinks.forEach(function(a){ a.classList.toggle('active', current && a.dataset.sec === current.id); });
+  }
+  document.addEventListener('scroll', updateActive, {passive:true});
+  updateActive();
+
+  /* ---------- entrance animation on load ----------
+     Every .reveal/.teaser is fully visible by CSS default (correct at rest,
+     with or without JS). When JS runs, we briefly flip to a "pre" (hidden)
+     state and immediately transition back to visible, staggered slightly -
+     a one-time on-load flourish, never gated behind scrolling/observers, so
+     nothing depends on the viewer scrolling to ever see real content. */
+  if(!reduceMotion){
+    var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal, .teaser'));
+    revealEls.forEach(function(el){ el.classList.add('pre'); });
+    requestAnimationFrame(function(){
+      requestAnimationFrame(function(){
+        revealEls.forEach(function(el, i){
+          setTimeout(function(){ el.classList.remove('pre'); }, Math.min(i * 35, 350));
+        });
+      });
+    });
+  }
+
+  /* ---------- number emphasis on load ----------
+     The figures are printed correct and final in the markup - never "0",
+     never mutated by script - so they are right in every case: JS disabled,
+     a static capture, a slow connection, or a link-preview bot. JS only adds
+     a brief, non-mutating scale/opacity pop for polish; the digits themselves
+     never change. */
+  if(!reduceMotion){
+    var counters = Array.prototype.slice.call(document.querySelectorAll('.cu'));
+    counters.forEach(function(c){ c.classList.add('num-pop'); });
+    counters.forEach(function(c, i){
+      setTimeout(function(){ c.classList.add('popped'); }, 260 + i * 50);
+    });
+  }
+
+  /* ---------- feature accordion ---------- */
+  document.querySelectorAll('.feature-item').forEach(function(item){
+    var btn = item.querySelector('.feature-btn');
+    btn.addEventListener('click', function(){
+      var wasOpen = item.classList.contains('open');
+      document.querySelectorAll('.feature-item.open').forEach(function(o){ o.classList.remove('open'); });
+      if(!wasOpen) item.classList.add('open');
+    });
+  });
+
+  /* ---------- recommendations modal ---------- */
+  var overlay = document.getElementById('recsOverlay');
+  var closeBtn = document.getElementById('closeRecs');
+  var lastFocused = null;
+  function openModal(){
+    lastFocused = document.activeElement;
+    overlay.classList.add('open');
+    overlay.querySelector('.modal').focus();
+    document.body.style.overflow = 'hidden';
+  }
+  function closeModal(){
+    overlay.classList.remove('open');
+    document.body.style.overflow = '';
+    if(lastFocused) lastFocused.focus();
+  }
+  document.querySelectorAll('[data-open-recs]').forEach(function(b){ b.addEventListener('click', openModal); });
+  closeBtn.addEventListener('click', closeModal);
+  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
+  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
+
+  /* ---------- mobile menu (simple toggle reveal of nav as column) ---------- */
+  var menuToggle = document.getElementById('menuToggle');
+  var quicknav = document.getElementById('quicknav');
+  menuToggle.addEventListener('click', function(){
+    var open = quicknav.style.display === 'flex';
+    if(open){ quicknav.style.display=''; menuToggle.setAttribute('aria-expanded','false'); }
+    else{
+      quicknav.style.display='flex';
+      quicknav.style.position='absolute';
+      quicknav.style.insetInlineEnd='24px';
+      quicknav.style.top='58px';
+      quicknav.style.flexDirection='column';
+      quicknav.style.background='var(--paper)';
+      quicknav.style.border='1px solid var(--line)';
+      quicknav.style.borderRadius='14px';
+      quicknav.style.padding='16px';
+      quicknav.style.boxShadow='var(--shadow-lg)';
+      quicknav.querySelectorAll('a').forEach(function(a){ a.style.display='block'; });
+      menuToggle.setAttribute('aria-expanded','true');
+    }
+  });
+
+  /* ---------- trend chart (SVG bar chart, 2 series x 4 years) ---------- */
+  var YEARS = ['1444هـ','1445هـ','1446هـ','1447هـ'];
+  var TAHSILI = [67.1, 68.3, 69.9, 70.9];
+  var QUDURAT = [68.6, 67.6, 68.0, 69.3];
+  var COLOR_T = '#146C43', COLOR_Q = '#B8892B';
+
+  function buildChart(){
+    var svg = document.getElementById('trendChart');
+    var W = 920, H = 320;
+    var padL = 46, padR = 20, padT = 20, padB = 40;
+    var plotW = W - padL - padR, plotH = H - padT - padB;
+    var yMin = 60, yMax = 74;
+    var n = YEARS.length;
+    var groupW = plotW / n;
+    var barW = groupW * 0.3;
+
+    function yScale(v){ return padT + plotH - ((v - yMin) / (yMax - yMin)) * plotH; }
+
+    var ns = 'http://www.w3.org/2000/svg';
+    function el(tag, attrs){
+      var e = document.createElementNS(ns, tag);
+      for(var k in attrs){ e.setAttribute(k, attrs[k]); }
+      return e;
+    }
+
+    svg.innerHTML = '';
+    svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
+
+    /* gridlines + y labels */
+    var steps = 4;
+    for(var i=0;i<=steps;i++){
+      var v = yMin + (yMax - yMin) * (i/steps);
+      var y = yScale(v);
+      svg.appendChild(el('line', {x1:padL, x2:W-padR, y1:y, y2:y, class:'gridline'}));
+      var lab = el('text', {x:padL-10, y:y+4, class:'axis-label', 'text-anchor':'end'});
+      lab.textContent = v.toFixed(0);
+      svg.appendChild(lab);
+    }
+
+    /* bars */
+    YEARS.forEach(function(year, i){
+      var gx = padL + i*groupW + groupW/2;
+      var xT = gx - barW - 4;
+      var xQ = gx + 4;
+
+      var vT = TAHSILI[i], vQ = QUDURAT[i];
+      var yT = yScale(vT), yQ = yScale(vQ);
+      var baseY = yScale(yMin);
+
+      var rT = el('rect', {x:xT, y:baseY, width:barW, height:0, rx:6, fill:COLOR_T, 'data-final-y':yT, 'data-final-h':(baseY-yT), 'data-label':'التحصيلي '+year, 'data-value':vT.toFixed(1)});
+      var rQ = el('rect', {x:xQ, y:baseY, width:barW, height:0, rx:6, fill:COLOR_Q, 'data-final-y':yQ, 'data-final-h':(baseY-yQ), 'data-label':'القدرات '+year, 'data-value':vQ.toFixed(1)});
+      svg.appendChild(rT); svg.appendChild(rQ);
+
+      var tT = el('text', {x:xT+barW/2, y:yT-8, class:'bar-val', 'text-anchor':'middle'}); tT.textContent = vT.toFixed(1);
+      var tQ = el('text', {x:xQ+barW/2, y:yQ-8, class:'bar-val', 'text-anchor':'middle'}); tQ.textContent = vQ.toFixed(1);
+      svg.appendChild(tT); svg.appendChild(tQ);
+
+      var xl = el('text', {x:gx, y:H-14, class:'axis-label', 'text-anchor':'middle'}); xl.textContent = year;
+      svg.appendChild(xl);
+
+      [rT, rQ].forEach(function(r){
+        r.style.cursor='pointer';
+        r.addEventListener('mouseenter', function(e){ showTip(e, r.dataset.label, r.dataset.value); });
+        r.addEventListener('mousemove', function(e){ moveTip(e); });
+        r.addEventListener('mouseleave', hideTip);
+      });
+    });
+
+    /* Grow the bars on load - never gated behind scrolling into view, so the
+       chart always settles to its correct final state within a second of
+       the page loading, whatever the scroll position. */
+    var rects = svg.querySelectorAll('rect');
+    function animateBars(){
+      rects.forEach(function(r, idx){
+        var finalY = parseFloat(r.getAttribute('data-final-y'));
+        var finalH = parseFloat(r.getAttribute('data-final-h'));
+        if(reduceMotion){ r.setAttribute('y', finalY); r.setAttribute('height', finalH); return; }
+        setTimeout(function(){
+          r.style.transition = 'y .6s cubic-bezier(.2,.7,.3,1), height .6s cubic-bezier(.2,.7,.3,1)';
+          r.setAttribute('y', finalY);
+          r.setAttribute('height', finalH);
+        }, idx*45);
+      });
+    }
+    animateBars();
+  }
+
+  var tipEl = document.getElementById('chartTip');
+  function showTip(e, label, value){
+    tipEl.textContent = label + ': ' + value;
+    tipEl.style.opacity = '1';
+    moveTip(e);
+  }
+  function moveTip(e){
+    var wrap = document.querySelector('.chart-wrap').getBoundingClientRect();
+    tipEl.style.left = (e.clientX - wrap.left) + 'px';
+    tipEl.style.top = (e.clientY - wrap.top) + 'px';
+  }
+  function hideTip(){ tipEl.style.opacity = '0'; }
+
+  buildChart();
+
+  /* ---------- distribution bars ---------- */
+  var LEVELS = [
+    {key:'high', label:'مرتفع (75 فأكثر)', color:'#1E8449'},
+    {key:'med', label:'متوسط (65 - أقل من 75)', color:'#2E86C1'},
+    {key:'low', label:'منخفض (55 - أقل من 65)', color:'#E67E22'},
+    {key:'vlow', label:'منخفض جدًا (أقل من 55)', color:'#C0392B'}
+  ];
+  var DIST_TAHSILI = {high:38.6, med:24.3, low:28.2, vlow:8.9};
+  var DIST_QUDURAT = {high:33.0, med:22.5, low:35.5, vlow:9.1};
+
+  function buildDist(containerId, legendId, data){
+    var bar = document.getElementById(containerId);
+    var legend = document.getElementById(legendId);
+    bar.innerHTML = ''; legend.innerHTML = '';
+    LEVELS.forEach(function(lv){
+      var pct = data[lv.key];
+      var seg = document.createElement('div');
+      seg.className = 'dist-seg';
+      seg.style.width = pct + '%';
+      seg.style.background = lv.color;
+      seg.title = lv.label + ': ' + pct + '%';
+      if(pct >= 9) seg.textContent = pct.toFixed(1) + '%';
+      bar.appendChild(seg);
+
+      var li = document.createElement('span');
+      li.innerHTML = '<i class="swatch" style="background:'+lv.color+'"></i>' + lv.label + ' <b class="num">' + pct.toFixed(1) + '%</b>';
+      legend.appendChild(li);
+    });
+  }
+  buildDist('distTahsili','distTahsiliLegend', DIST_TAHSILI);
+  buildDist('distQudurat','distQuduratLegend', DIST_QUDURAT);
+
+})();
+</script>
