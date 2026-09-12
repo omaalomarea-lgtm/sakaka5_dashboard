@@ -169,27 +169,34 @@
   .reveal{opacity:1; transform:translateY(0); transition:opacity .7s ease, transform .7s ease;}
   .reveal.pre{opacity:0; transform:translateY(22px);}
 
-  /* ---------- stat grid ---------- */
-  .stat-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:16px; margin-bottom:52px;}
-  @media (max-width:960px){.stat-grid{grid-template-columns:repeat(2,1fr);}}
-  @media (max-width:520px){.stat-grid{grid-template-columns:1fr;}}
-  .stat-card{
+  /* ---------- unified comparison table (replaces duplicate stat boxes) ---------- */
+  .compare-card{
     background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
-    padding:24px 22px; box-shadow:var(--shadow-sm); position:relative; overflow:hidden;
+    padding:26px 26px 8px; box-shadow:var(--shadow-sm); margin-bottom:28px;
   }
-  .stat-card::before{
-    content:''; position:absolute; inset-inline-start:0; top:0; bottom:0; width:5px;
-    background:var(--bar-color, var(--forest));
+  .compare-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:16px;}
+  .compare-head h3{font-size:1.15rem;}
+  .compare-table-wrap{overflow-x:auto;}
+  table.compare-table{width:100%; border-collapse:collapse; font-size:.94rem;}
+  table.compare-table th, table.compare-table td{padding:13px 14px; text-align:center; white-space:nowrap;}
+  table.compare-table thead th{
+    font-family:'Tajawal',sans-serif; font-weight:700; font-size:.82rem; color:var(--ink-faint);
+    border-bottom:2px solid var(--line);
   }
-  .stat-card .s-kicker{font-size:.78rem; font-weight:700; color:var(--ink-faint); margin-bottom:10px; display:block;}
-  .stat-card .s-num{font-family:'El Messiri',sans-serif; font-size:2.5rem; font-weight:700; color:var(--forest); line-height:1;}
-  .stat-card .s-unit{font-size:1.1rem; font-weight:600; color:var(--ink-faint);}
-  .stat-card .s-delta{
-    display:inline-flex; align-items:center; gap:4px; margin-top:12px;
-    background:var(--forest-tint); color:var(--forest); font-weight:700; font-size:.82rem;
-    padding:4px 10px; border-radius:999px;
+  table.compare-table thead th:first-child, table.compare-table td:first-child{text-align:start; white-space:normal;}
+  table.compare-table tbody tr{border-bottom:1px solid var(--line);}
+  table.compare-table tbody tr:last-child{border-bottom:none;}
+  table.compare-table td.col-t{color:var(--forest); font-weight:700;}
+  table.compare-table td.col-q{color:var(--gold-deep); font-weight:700;}
+  table.compare-table tr.hl{background:var(--forest-tint);}
+  table.compare-table tr.hl td:first-child{font-weight:700; color:var(--forest);}
+  table.compare-table .mini{font-size:.78rem; font-weight:500; color:var(--ink-faint);}
+  .sub-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:24px 26px; box-shadow:var(--shadow-sm); margin-top:20px; margin-bottom:52px;
   }
-  .stat-card .s-foot{font-size:.85rem; color:var(--ink-soft); margin-top:12px;}
+  .sub-card h4{font-size:1rem; color:var(--forest); margin-bottom:14px; font-family:'Tajawal',sans-serif; font-weight:700;}
+  table.sub-table td:first-child{font-weight:600;}
 
   /* ---------- chart ---------- */
   .chart-card{
@@ -212,14 +219,14 @@
   }
   .chart-wrap{position:relative;}
 
-  /* ---------- distribution ---------- */
-  .dist-grid{display:grid; grid-template-columns:1fr 1fr; gap:20px;}
-  @media (max-width:760px){.dist-grid{grid-template-columns:1fr;}}
-  .dist-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:24px 26px; box-shadow:var(--shadow-sm);}
-  .dist-card h4{font-size:1rem; color:var(--forest); margin-bottom:14px; font-family:'Tajawal',sans-serif; font-weight:700;}
-  .dist-bar{display:flex; height:34px; border-radius:10px; overflow:hidden; margin-bottom:12px; border:1px solid var(--line);}
+  /* ---------- distribution (single merged card, two rows, one shared legend) ---------- */
+  .dist-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:26px 26px 22px; box-shadow:var(--shadow-sm);}
+  .dist-card h4{font-size:1rem; color:var(--forest); margin-bottom:18px; font-family:'Tajawal',sans-serif; font-weight:700;}
+  .dist-row{display:flex; align-items:center; gap:16px; margin-bottom:14px;}
+  .dist-row-label{flex:none; width:72px; font-size:.85rem; font-weight:700; color:var(--ink);}
+  .dist-bar{flex:1; display:flex; height:32px; border-radius:10px; overflow:hidden; border:1px solid var(--line); min-width:0;}
   .dist-seg{display:flex; align-items:center; justify-content:center; color:#fff; font-size:.72rem; font-weight:700; min-width:0;}
-  .dist-legend{display:flex; flex-wrap:wrap; gap:12px 16px; font-size:.78rem; color:var(--ink-soft);}
+  .dist-legend{display:flex; flex-wrap:wrap; gap:12px 18px; font-size:.78rem; color:var(--ink-soft); margin-top:6px; padding-top:14px; border-top:1px solid var(--line);}
   .dist-legend span{display:inline-flex; align-items:center; gap:6px;}
 
   /* ---------- story ---------- */
@@ -256,10 +263,7 @@
   .raez-tile{background:var(--sand); border:1px solid var(--line); border-radius:14px; padding:16px; text-align:center;}
   .raez-tile .r-num{font-family:'El Messiri',sans-serif; font-weight:700; font-size:1.7rem; color:var(--gold-deep);}
   .raez-tile .r-label{font-size:.76rem; color:var(--ink-soft); margin-top:4px;}
-  .raez-chip{
-    display:inline-flex; align-items:center; gap:8px; background:var(--forest-tint); color:var(--forest);
-    font-weight:700; font-size:.82rem; padding:8px 14px; border-radius:999px;
-  }
+  .raez-tile .r-target{font-size:.7rem; color:var(--ink-faint); margin-top:6px; padding-top:6px; border-top:1px dashed var(--line);}
 
   .impact-callout{
     background:linear-gradient(135deg, var(--forest) 0%, #0E5B3E 100%);
@@ -370,31 +374,43 @@
   <section id="numbers" class="section numbers-section">
     <div class="wrap">
       <span class="section-kicker reveal">لغة الأرقام</span>
-      <h2 class="section-title reveal">النتائج والمراكز التنافسية لعام 1447/1448هـ</h2>
-      <p class="section-lede reveal">قراءة رقمية موثقة لأداء طالبات المدرسة في اختباري التحصيلي والقدرات العامة (المسار العلمي)، مقارنة بمستوى إدارة التعليم بمنطقة الجوف والمملكة العربية السعودية.</p>
+      <h2 class="section-title reveal">النتائج والمركز التنافسي لعام 1447/1448هـ</h2>
+      <p class="section-lede reveal">قراءة رقمية موحّدة ومترابطة لأداء طالبات المدرسة في اختباري التحصيلي والقدرات العامة (المسار العلمي)، في جداول مقارنة واحدة بدل التكرار، تُبرز الإنجاز الأبرز في اختبار التحصيلي أولاً.</p>
 
-      <div class="stat-grid">
-        <div class="stat-card reveal" style="--bar-color:var(--forest-2)">
-          <span class="s-kicker">التحصيلي - المسار العلمي</span>
-          <div class="s-num"><span class="cu num" data-target="70.9" data-decimals="1">70.9</span></div>
-          <span class="s-delta">▲ <span class="num">+0.96</span> نقطة عن 1446هـ</span>
-          <p class="s-foot">بمشاركة <b class="num">259</b> طالبة</p>
+      <div class="compare-card reveal">
+        <div class="compare-head">
+          <h3>النتائج الرئيسة والمركز التنافسي</h3>
+          <div class="legend">
+            <span><i class="swatch" style="background:var(--forest-2)"></i>التحصيلي</span>
+            <span><i class="swatch" style="background:var(--gold)"></i>القدرات العامة</span>
+          </div>
         </div>
-        <div class="stat-card reveal" style="--bar-color:var(--gold)">
-          <span class="s-kicker">القدرات العامة - المسار العلمي</span>
-          <div class="s-num"><span class="cu num" data-target="69.3" data-decimals="1">69.3</span></div>
-          <span class="s-delta">▲ <span class="num">+1.38</span> نقطة عن 1446هـ</span>
-          <p class="s-foot">بمشاركة <b class="num">276</b> طالبة</p>
-        </div>
-        <div class="stat-card reveal" style="--bar-color:var(--forest-2)">
-          <span class="s-kicker">الترتيب - التحصيلي</span>
-          <div class="s-num">المرتبة <span class="cu num" data-target="1" data-decimals="0">1</span></div>
-          <p class="s-foot">من <b class="num">63</b> مدرسة بإدارة التعليم (100%)<br>أعلى من <b class="num">79.97%</b> من مدارس المملكة</p>
-        </div>
-        <div class="stat-card reveal" style="--bar-color:var(--gold)">
-          <span class="s-kicker">الترتيب - القدرات</span>
-          <div class="s-num">المرتبة <span class="cu num" data-target="3" data-decimals="0">3</span></div>
-          <p class="s-foot">من <b class="num">64</b> مدرسة بإدارة التعليم (96.83%)<br>أعلى من <b class="num">74.29%</b> من مدارس المملكة</p>
+        <div class="compare-table-wrap">
+          <table class="compare-table">
+            <thead><tr><th>المؤشر</th><th>التحصيلي</th><th>القدرات العامة</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>المتوسط والمشاركة 1447هـ</td>
+                <td class="col-t"><b class="cu num" data-target="70.9" data-decimals="1">70.9</b> <span class="mini">(259 طالبة)</span></td>
+                <td class="col-q"><b class="cu num" data-target="69.3" data-decimals="1">69.3</b> <span class="mini">(276 طالبة)</span></td>
+              </tr>
+              <tr>
+                <td>النمو عن 1446هـ</td>
+                <td class="col-t">▲ <span class="num">0.96</span> نقطة</td>
+                <td class="col-q">▲ <span class="num">1.38</span> نقطة</td>
+              </tr>
+              <tr class="hl">
+                <td>الترتيب على إدارة التعليم بالجوف</td>
+                <td class="col-t">المرتبة <span class="cu num" data-target="1" data-decimals="0">1</span> من 63 (100%)</td>
+                <td class="col-q">المرتبة <span class="cu num" data-target="3" data-decimals="0">3</span> من 64 (96.83%)</td>
+              </tr>
+              <tr>
+                <td>الترتيب على مستوى المملكة</td>
+                <td class="col-t"><span class="num">467</span> من <span class="num">2328</span> (79.97%)</td>
+                <td class="col-q"><span class="num">601</span> من <span class="num">2335</span> (74.29%)</td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
 
@@ -412,16 +428,33 @@
         </div>
       </div>
 
-      <div class="dist-grid">
-        <div class="dist-card reveal">
-          <h4>توزيع الطالبات على مستويات الأداء - التحصيلي</h4>
-          <div class="dist-bar" id="distTahsili"></div>
-          <div class="dist-legend" id="distTahsiliLegend"></div>
-        </div>
-        <div class="dist-card reveal">
-          <h4>توزيع الطالبات على مستويات الأداء - القدرات</h4>
-          <div class="dist-bar" id="distQudurat"></div>
-          <div class="dist-legend" id="distQuduratLegend"></div>
+      <div class="dist-card reveal">
+        <h4>توزيع الطالبات على مستويات الأداء</h4>
+        <div class="dist-row"><span class="dist-row-label">التحصيلي</span><div class="dist-bar" id="distTahsili"></div></div>
+        <div class="dist-row"><span class="dist-row-label">القدرات</span><div class="dist-bar" id="distQudurat"></div></div>
+        <div class="dist-legend" id="distLegend"></div>
+      </div>
+
+      <div class="sub-card reveal">
+        <h4>أداء المجالات والمهارات الفرعية</h4>
+        <div class="compare-table-wrap">
+          <table class="compare-table sub-table">
+            <thead><tr><th>المسار</th><th>المدرسة</th><th>إدارة التعليم</th><th>المملكة</th></tr></thead>
+            <tbody>
+              <tr>
+                <td>التحصيلي (الأحياء، الرياضيات، الفيزياء، الكيمياء)</td>
+                <td class="col-t"><b class="num">70.86%</b></td>
+                <td><span class="num">60.80%</span></td>
+                <td><span class="num">67.33%</span></td>
+              </tr>
+              <tr>
+                <td>القدرات (الكمي واللفظي)</td>
+                <td class="col-q"><b class="num">69.34%</b></td>
+                <td><span class="num">61.76%</span></td>
+                <td><span class="num">67.13%</span></td>
+              </tr>
+            </tbody>
+          </table>
         </div>
       </div>
     </div>
@@ -463,10 +496,17 @@
           <h3>منصة رائز المعرفة</h3>
           <p>أداة تحليلية رقمية حوّلت نتائج التحصيلي والقدرات إلى خطط علاجية فردية دقيقة لكل طالبة، فأثمر هذا التوظيف أثرًا تحصيليًا فعليًا تجاوز المستهدف المعتمد.</p>
           <div class="raez-stats">
-            <div class="raez-tile"><div class="r-num"><span class="cu num" data-target="28" data-decimals="0">28</span>%</div><div class="r-label">نمو تحصيلي فعلي</div></div>
-            <div class="raez-tile"><div class="r-num">↓<span class="cu num" data-target="30" data-decimals="0">30</span>%</div><div class="r-label">انخفاض زمن الإجابة</div></div>
+            <div class="raez-tile">
+              <div class="r-num"><span class="cu num" data-target="28" data-decimals="0">28</span>%</div>
+              <div class="r-label">نمو تحصيلي فعلي</div>
+              <div class="r-target">تجاوز المستهدف المعتمد (20%)</div>
+            </div>
+            <div class="raez-tile">
+              <div class="r-num">↓<span class="cu num" data-target="30" data-decimals="0">30</span>%</div>
+              <div class="r-label">انخفاض زمن الإجابة</div>
+              <div class="r-target">مؤشر تحسّن الطلاقة المهارية</div>
+            </div>
           </div>
-          <span class="raez-chip">◆ تجاوز المستهدف البالغ 20% بفارق واضح</span>
           <div class="impact-callout">
             <p>سجّلت مؤشرات التفاعل الرقمي للطالبات مع محتوى المنصة <strong>ارتفاعًا ملحوظًا</strong> خلال فترة التطبيق، وانخفض زمن الإجابة نتيجة تحسّن <strong>الطلاقة المهارية</strong> وسرعة الاسترجاع المعرفي، لا على حساب الدقة.</p>
           </div>
@@ -499,13 +539,13 @@
     <h2 id="recsTitle">التوصيات الاستراتيجية القابلة للتعميم</h2>
     <p class="modal-sub">مقترحة للتعميم على مدارس منطقة الجوف، استنادًا إلى نموذج العمل المطبَّق في الثانوية الخامسة بسكاكا.</p>
     <ol class="recs-list">
-      <li><span class="r-index num">1</span><p>اعتماد آلية دورية ثابتة لتحليل بطاقتي التحصيلي والقدرات مع فرق العمل المدرسية، وربطها بلقاء تحليلي دوري مع مشرفي وحدة دعم التميز، بدلًا من الاكتفاء بالتحليل بعد صدور النتائج فقط.</p></li>
+      <li><span class="r-index num">1</span><p>اعتماد آلية دورية ثابتة لتحليل بطاقتي التحصيلي والقدرات ضمن اجتماعات اللجان الداخلية (لجنة التميز ولجنة التحصيلي الدراسي)، بدلًا من الاكتفاء بالتحليل بعد صدور النتائج فقط.</p></li>
       <li><span class="r-index num">2</span><p>الانتقال من قراءة المتوسط العام إلى تحليل المجالات والمهارات الفرعية في كل اختبار، باعتباره الأساس العلمي لبناء خطط معالجة وإثراء دقيقة وموجّهة.</p></li>
-      <li><span class="r-index num">3</span><p>تصميم مسارين متوازيين وواضحين في كل مدرسة: مسار علاجي فردي للطالبات في المستويين المنخفض والمنخفض جدًا وفق نتائج كل طالبة، ومسار إثرائي للطالبات في المستوى المرتفع لتحويل التميز إلى تفوق.</p></li>
-      <li><span class="r-index num">4</span><p>تبني هدف مؤسسي صريح لرفع نسبة الطالبات المتجاوزات لمتوسط الاختبار العام في كلا الاختبارين، واعتماده كمؤشر أداء رئيس يُتابَع سنويًا.</p></li>
-      <li><span class="r-index num">5</span><p>تعزيز منظومة التحفيز والتكريم ونشر ثقافة التميز داخل البيئة المدرسية، باعتبارها رافعة أساسية لمعالجة ضعف الدافعية لدى الطالبات.</p></li>
-      <li><span class="r-index num">6</span><p>تفعيل برامج تبادل الخبرات بين المعلمات داخل المدرسة وبين مدارس المنطقة، وتوظيف المنصات التعليمية والموارد الرقمية في الاستعداد للاختبارات الوطنية.</p></li>
-      <li><span class="r-index num">7</span><p>اعتماد لوحة مؤشرات كمية ثابتة على مستوى إدارة التعليم لمتابعة أداء المدارس، تشمل: متوسط المدرسة، معدل التغير السنوي، نسبة المستوى المرتفع، نسبة المستوى المنخفض جدًا، ونسبة الطالبات فوق متوسط الاختبار، بما يتيح مقارنة موضوعية ومتابعة مستمرة للأثر.</p></li>
+      <li><span class="r-index num">3</span><p>تفعيل مجتمعات التعلم المهنية بين المعلمات ودمجها بمشروع تحسين التدريس، عبر الزيارات الصفية التبادلية والتغذية الراجعة الفورية، كإطار دائم لتبادل الممارسات الناجحة ومعالجة الفجوات التدريسية المشتركة أولًا بأول.</p></li>
+      <li><span class="r-index num">4</span><p>تصميم مسارين متوازيين وواضحين في كل مدرسة: مسار علاجي فردي للطالبات في المستويين المنخفض والمنخفض جدًا وفق نتائج كل طالبة، ومسار إثرائي للطالبات في المستوى المرتفع لتحويل التميز إلى تفوق.</p></li>
+      <li><span class="r-index num">5</span><p>تبني هدف مؤسسي صريح لرفع نسبة الطالبات المتجاوزات لمتوسط الاختبار العام في كلا الاختبارين، واعتماده كمؤشر أداء رئيس يُتابَع سنويًا.</p></li>
+      <li><span class="r-index num">6</span><p>ترسيخ منظومة تحفيز مستدامة مقترنة بانضباط مدرسي واضح المعايير، بحيث تشكّل البيئة الصفية المنظمة والآمنة رافعة داعمة للأداء الأكاديمي لا مجرد حوافز لحظية.</p></li>
+      <li><span class="r-index num">7</span><p>تعميم توظيف منصة رائز المعرفة والمنصات الرقمية المساندة في الاستعداد للاختبارات الوطنية، مع اعتماد لوحة مؤشرات كمية ثابتة (متوسط المدرسة، معدل التغير السنوي، نسبة المستوى المرتفع، نسبة المستوى المنخفض جدًا، ونسبة الطالبات فوق متوسط الاختبار) لمتابعة الأثر بموضوعية واستمرار.</p></li>
     </ol>
   </div>
 </div>
@@ -733,10 +773,9 @@
   var DIST_TAHSILI = {high:38.6, med:24.3, low:28.2, vlow:8.9};
   var DIST_QUDURAT = {high:33.0, med:22.5, low:35.5, vlow:9.1};
 
-  function buildDist(containerId, legendId, data){
+  function buildDist(containerId, data){
     var bar = document.getElementById(containerId);
-    var legend = document.getElementById(legendId);
-    bar.innerHTML = ''; legend.innerHTML = '';
+    bar.innerHTML = '';
     LEVELS.forEach(function(lv){
       var pct = data[lv.key];
       var seg = document.createElement('div');
@@ -746,14 +785,20 @@
       seg.title = lv.label + ': ' + pct + '%';
       if(pct >= 9) seg.textContent = pct.toFixed(1) + '%';
       bar.appendChild(seg);
-
+    });
+  }
+  function buildDistLegend(legendId){
+    var legend = document.getElementById(legendId);
+    legend.innerHTML = '';
+    LEVELS.forEach(function(lv){
       var li = document.createElement('span');
-      li.innerHTML = '<i class="swatch" style="background:'+lv.color+'"></i>' + lv.label + ' <b class="num">' + pct.toFixed(1) + '%</b>';
+      li.innerHTML = '<i class="swatch" style="background:'+lv.color+'"></i>' + lv.label;
       legend.appendChild(li);
     });
   }
-  buildDist('distTahsili','distTahsiliLegend', DIST_TAHSILI);
-  buildDist('distQudurat','distQuduratLegend', DIST_QUDURAT);
+  buildDist('distTahsili', DIST_TAHSILI);
+  buildDist('distQudurat', DIST_QUDURAT);
+  buildDistLegend('distLegend');
 
 })();
 </script>
