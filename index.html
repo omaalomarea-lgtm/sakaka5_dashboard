@@ -1,5 +1,5 @@
 <title>أعمدة الأثر</title>
-<meta name="description" content="لوحة تفاعلية لورقة العمل القيادية للثانوية الخامسة بسكاكا: الأرقام، المراكز التنافسية، ومبادرات التميز">
+<meta name="description" content="تجربة الثانوية الخامسة للبنات بسكاكا في تحسين نواتج التعلم في اختباري القدرات العامة والتحصيلي: الأرقام، جهود فريق العمل، والمبادرات النوعية">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -113,12 +113,10 @@
   .stelae{position:absolute; inset:0; z-index:0; opacity:.5; pointer-events:none;}
   .hero-inner{position:relative; z-index:1; max-width:900px; margin:0 auto; padding-inline:24px; text-align:center;}
   .eyebrow{
-    display:inline-flex; align-items:center; gap:8px;
-    font-size:.82rem; font-weight:700; color:var(--gold-deep);
-    background:var(--gold-tint); border:1px solid #E8D6A0;
-    padding:7px 16px; border-radius:999px; margin-bottom:22px;
+    display:block; text-align:center; max-width:720px; margin:0 auto 24px;
+    font-size:1.05rem; font-weight:700; color:var(--gold-deep); line-height:1.6;
   }
-  .eyebrow::before{content:'◆'; font-size:.6rem; color:var(--gold);}
+  .eyebrow::before{content:'◆ '; font-size:.7rem; color:var(--gold);}
   h1.hero-title{
     font-size:clamp(2rem, 4.6vw, 3.1rem); font-weight:700; line-height:1.28;
     color:var(--forest); margin-bottom:18px;
@@ -229,6 +227,42 @@
   .dist-legend{display:flex; flex-wrap:wrap; gap:12px 18px; font-size:.78rem; color:var(--ink-soft); margin-top:6px; padding-top:14px; border-top:1px solid var(--line);}
   .dist-legend span{display:inline-flex; align-items:center; gap:6px;}
 
+  /* ---------- team (internal committees & fieldwork roles) ---------- */
+  .process-strip{
+    display:flex; flex-wrap:wrap; gap:0; margin-bottom:40px;
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    box-shadow:var(--shadow-sm); padding:22px 26px;
+  }
+  .process-step{display:flex; align-items:flex-start; gap:12px; flex:1 1 220px; padding:6px 14px;}
+  .process-step .p-num{
+    flex:none; width:30px; height:30px; border-radius:50%; background:var(--forest); color:#fff;
+    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.85rem;
+    font-family:'El Messiri',sans-serif;
+  }
+  .process-step p{font-size:.86rem; color:var(--ink-soft); line-height:1.6;}
+  .process-step p b{color:var(--forest); display:block; font-size:.88rem; margin-bottom:2px;}
+  .process-arrow{flex:none; align-self:center; color:var(--line); font-size:1.2rem; padding:0 4px;}
+  @media (max-width:760px){.process-arrow{display:none;}}
+
+  .role-grid{display:grid; grid-template-columns:repeat(3,1fr); gap:16px;}
+  @media (max-width:900px){.role-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.role-grid{grid-template-columns:1fr;}}
+  .role-subhead{font-size:1.02rem; color:var(--forest); font-family:'Tajawal',sans-serif; font-weight:700; margin:34px 0 16px;}
+  .role-grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
+  @media (max-width:700px){.role-grid-2{grid-template-columns:1fr;}}
+  .role-card{
+    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
+    padding:22px 20px; box-shadow:var(--shadow-sm);
+  }
+  .role-card .role-icon{
+    width:40px; height:40px; border-radius:12px; background:var(--forest-tint); color:var(--forest);
+    display:flex; align-items:center; justify-content:center; font-size:1.05rem; margin-bottom:14px;
+  }
+  .role-card.accent .role-icon{background:var(--gold-tint); color:var(--gold-deep);}
+  .role-card h4{font-size:1rem; color:var(--forest); margin-bottom:8px; font-family:'Tajawal',sans-serif; font-weight:700;}
+  .role-card.accent h4{color:var(--gold-deep);}
+  .role-card p{font-size:.86rem; line-height:1.75;}
+
   /* ---------- story ---------- */
   .story-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:22px; align-items:start;}
   @media (max-width:900px){.story-grid{grid-template-columns:1fr;}}
@@ -329,6 +363,7 @@
     <nav class="quicknav" id="quicknav">
       <a href="#intro" data-sec="intro">المقدمة</a>
       <a href="#numbers" data-sec="numbers">لغة الأرقام</a>
+      <a href="#team" data-sec="team">فريق العمل</a>
       <a href="#story" data-sec="story">قصة النجاح</a>
       <button class="nav-cta" data-open-recs>التوصيات الاستراتيجية</button>
     </nav>
@@ -353,7 +388,7 @@
       </g>
     </svg>
     <div class="hero-inner">
-      <span class="eyebrow">ورقة عمل قيادية · لقاء قادة مدارس منطقة الجوف</span>
+      <span class="eyebrow">تجربة الثانوية الخامسة للبنات بسكاكا في تحسين نواتج التعلم في مجال اختبار القدرات العامة والاختبارات التحصيلية</span>
       <h1 class="hero-title">حين تتحول <em>البيانات</em> إلى قرار، والقرار إلى أثر</h1>
       <p class="hero-sub">قصة الثانوية الخامسة بسكاكا (مسارات) في بناء نموذج قيادة مدرسية مبني على البيانات، حقّق نموًا مضطردًا في نتائج التحصيلي والقدرات، ومركزًا تنافسيًا متقدمًا على مستوى منطقة الجوف والمملكة، وفق مستهدفات رؤية المملكة العربية السعودية 2030.</p>
       <div class="meta-row">
@@ -455,6 +490,78 @@
               </tr>
             </tbody>
           </table>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="team" class="section team-section">
+    <div class="wrap">
+      <span class="section-kicker reveal">منهجية العمل المؤسسي</span>
+      <h2 class="section-title reveal">جهود فريق العمل ودوره في تحقيق النجاح</h2>
+      <p class="section-lede reveal">لم يكن التحسن المتحقق وليد الصدفة، بل نتاج تكامل داخلي بين اللجان المدرسية وفرق العمل الميداني، من التحليل إلى القرار فالتنفيذ، دون فجوات أو ازدواجية في الأدوار.</p>
+
+      <div class="process-strip reveal">
+        <div class="process-step">
+          <span class="p-num">١</span>
+          <p><b>تحليل البطاقة</b>ضمن اجتماع لجنة التحصيلي الدراسي بالمدرسة.</p>
+        </div>
+        <span class="process-arrow">←</span>
+        <div class="process-step">
+          <span class="p-num">٢</span>
+          <p><b>مناقشة الأولويات</b>في اجتماع لجنة التميز، وتوزيع الأدوار بين اللجان والوكيلات.</p>
+        </div>
+        <span class="process-arrow">←</span>
+        <div class="process-step">
+          <span class="p-num">٣</span>
+          <p><b>التوثيق والاعتماد</b>في تقرير إجرائي معتمد من مديرة المدرسة.</p>
+        </div>
+      </div>
+
+      <div class="role-grid">
+        <div class="role-card reveal">
+          <div class="role-icon">◆</div>
+          <h4>اللجنة الإدارية</h4>
+          <p>القيادة العامة للمدرسة، وتوجيه الأولويات المؤسسية التي تُبنى عليها خطط التحسين.</p>
+        </div>
+        <div class="role-card reveal">
+          <div class="role-icon">◆</div>
+          <h4>لجنة التميز</h4>
+          <p>رصد المؤشرات الرقمية وتحليلها، ومتابعة مسارات الجودة والتحسين المستمر.</p>
+        </div>
+        <div class="role-card reveal">
+          <div class="role-icon">◆</div>
+          <h4>لجنة التحصيلي الدراسي</h4>
+          <p>تحليل نتائج اختباري التحصيلي والقدرات، وتصميم خطط المعالجة والإثراء لكل طالبة.</p>
+        </div>
+        <div class="role-card accent reveal">
+          <div class="role-icon">◆</div>
+          <h4>الوكيلات</h4>
+          <p>ترجمة الخطط إلى إجراءات ميدانية يومية داخل المدرسة، ومتابعة تنفيذها أولًا بأول.</p>
+        </div>
+        <div class="role-card accent reveal">
+          <div class="role-icon">◆</div>
+          <h4>الموجهة الطلابية</h4>
+          <p>الدعم النفسي والتحفيزي للطالبات، وتعزيز دافعيتهن واستقرارهن الانفعالي وقت الاختبار.</p>
+        </div>
+        <div class="role-card accent reveal">
+          <div class="role-icon">◆</div>
+          <h4>منسقة منصة رائز</h4>
+          <p>تفعيل الخطط العلاجية الفردية رقميًا عبر المنصة، ومتابعة أثرها التحصيلي أولًا بأول.</p>
+        </div>
+      </div>
+
+      <h3 class="role-subhead reveal">المعلمات ومنظومة التحفيز والانضباط: رافعتا الاستدامة</h3>
+      <div class="role-grid-2">
+        <div class="role-card accent reveal">
+          <div class="role-icon">◆</div>
+          <h4>المعلمات المعنيّات</h4>
+          <p>التنفيذ اليومي المباشر للخطط العلاجية والإثرائية داخل الفصل وفق نتائج كل طالبة، عبر تفعيل مجتمعات التعلم المهنية ومشروع تحسين التدريس (الزيارات الصفية التبادلية والتغذية الراجعة الفورية بين المعلمات)، وهو الجهد الذي انعكس مباشرة تحسنًا ملموسًا في نتائج التحصيلي والقدرات.</p>
+        </div>
+        <div class="role-card reveal">
+          <div class="role-icon">◆</div>
+          <h4>التحفيز المستدام والانضباط المدرسي</h4>
+          <p>منظومة تحفيز مستدامة مرتبطة بمؤشرات الأداء الفردي والجماعي للطالبات، مقترنة بانضباط مدرسي واضح المعايير (الانتظام، الجدية، إدارة الوقت الصفي)، شكّلت معًا البيئة الداعمة التي مكّنت الخطط العلاجية والإثرائية من تحقيق أثرها الفعلي في تقدّم النتائج.</p>
         </div>
       </div>
     </div>
