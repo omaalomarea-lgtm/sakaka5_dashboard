@@ -1,5 +1,10 @@
+<!doctype html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <title>أعمدة الأثر</title>
-<meta name="description" content="تجربة الثانوية الخامسة للبنات بسكاكا في تحسين نواتج التعلم في اختباري القدرات العامة والتحصيلي: الأرقام، جهود فريق العمل، والمبادرات النوعية">
+<meta name="description" content="ورقة عمل تجربة الثانوية الخامسة للبنات بسكاكا في تحسين نواتج التعلم ورفع مستوى الأداء في اختباري التحصيلي والقدرات العامة">
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=El+Messiri:wght@500;600;700&family=Tajawal:wght@300;400;500;700;900&display=swap" rel="stylesheet">
@@ -18,10 +23,6 @@
     --gold-deep:#8C6620;
     --gold-tint:#F7ECD2;
     --line:#E1D3AC;
-    --lvl-high:#1E8449;
-    --lvl-med:#2E86C1;
-    --lvl-low:#E67E22;
-    --lvl-vlow:#C0392B;
     --shadow-lg: 0 30px 60px -30px rgba(11,74,50,.45);
     --shadow-sm: 0 10px 24px -18px rgba(11,74,50,.4);
     --radius: 20px;
@@ -40,7 +41,6 @@
     color:var(--ink);
     font-family:'Tajawal', 'Segoe UI', Tahoma, sans-serif;
     direction:rtl;
-    padding:0 0;
     -webkit-font-smoothing:antialiased;
   }
 
@@ -53,9 +53,6 @@
 
   p{line-height:1.9; color:var(--ink-soft); margin:0;}
   .num{font-variant-numeric:tabular-nums; direction:ltr; unicode-bidi:isolate;}
-  /* Purely decorative entrance pop for .cu figures - never mutates the digits,
-     so the value is correct even mid-transition, in a static capture, or with
-     JS disabled (this rule is inert without the .num-pop class from JS). */
   .num-pop{display:inline-block; transform:scale(.8); opacity:.5; transition:transform .45s cubic-bezier(.2,.7,.3,1), opacity .45s ease;}
   .num-pop.popped{transform:scale(1); opacity:1;}
 
@@ -64,14 +61,12 @@
 
   .wrap{max-width:1180px; margin:0 auto; padding-inline:24px;}
 
-  /* ---------- progress bar ---------- */
   #scrollProgress{
     position:fixed; inset-inline:0; top:0; height:3px; width:0%;
     background:linear-gradient(90deg, var(--gold), var(--forest-2));
     z-index:100; transition:width .1s linear;
   }
 
-  /* ---------- top bar ---------- */
   .topbar{
     position:sticky; top:0; z-index:60;
     background:rgba(246,239,221,.9);
@@ -85,26 +80,26 @@
   .brand{display:flex; flex-direction:column; gap:2px; min-width:0;}
   .brand-kicker{font-size:.7rem; color:var(--ink-faint); letter-spacing:.02em;}
   .brand-name{font-family:'El Messiri',sans-serif; font-weight:700; color:var(--forest); font-size:1.05rem;}
-  .quicknav{display:flex; align-items:center; gap:22px; font-size:.92rem; font-weight:500;}
+  .quicknav{display:flex; align-items:center; gap:20px; font-size:.9rem; font-weight:500;}
   .quicknav a{color:var(--ink-soft); text-decoration:none; padding-block:4px; border-bottom:2px solid transparent; transition:color .2s, border-color .2s;}
   .quicknav a:hover, .quicknav a.active{color:var(--forest); border-color:var(--gold);}
   .nav-cta{
+    display:inline-flex; align-items:center; justify-content:center;
     background:var(--forest); color:var(--paper); border:none; border-radius:999px;
-    padding:10px 20px; font-size:.88rem; font-weight:700; box-shadow:var(--shadow-sm);
-    transition:transform .2s, background .2s;
+    padding:10px 20px; font-size:.86rem; font-weight:700; box-shadow:var(--shadow-sm);
+    transition:transform .2s, background .2s; text-decoration:none;
   }
   .nav-cta:hover{background:var(--forest-2); transform:translateY(-1px);}
   .menu-toggle{display:none; background:none; border:none; font-size:1.4rem; color:var(--forest);}
 
-  @media (max-width:760px){
-    .quicknav a{display:none;}
+  @media (max-width:820px){
+    .quicknav a:not(.nav-cta){display:none;}
     .menu-toggle{display:block;}
   }
 
-  /* ---------- hero ---------- */
   .hero{
     position:relative; overflow:hidden;
-    padding:64px 0 72px;
+    padding:64px 0 60px;
     background:
       radial-gradient(1100px 480px at 85% -10%, var(--gold-tint) 0%, transparent 60%),
       radial-gradient(900px 500px at -10% 110%, var(--forest-tint) 0%, transparent 55%),
@@ -134,9 +129,7 @@
   }
   .meta-chip b{color:var(--forest); font-weight:700;}
 
-  .teaser-grid{
-    display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:38px;
-  }
+  .teaser-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:14px; margin-bottom:38px;}
   @media (max-width:820px){.teaser-grid{grid-template-columns:repeat(2,1fr);}}
   .teaser{
     background:var(--paper); border:1px solid var(--line); border-radius:16px;
@@ -156,31 +149,31 @@
   .scroll-cue span{display:inline-block; animation:bob 1.6s ease-in-out infinite;}
   @keyframes bob{0%,100%{transform:translateY(0);}50%{transform:translateY(5px);}}
 
-  /* ---------- sections ---------- */
-  .section{padding:76px 0;}
-  .section-kicker{
-    font-size:.8rem; font-weight:700; color:var(--gold-deep); letter-spacing:.02em; margin-bottom:10px; display:block;
-  }
+  .section{padding:70px 0;}
+  .section-kicker{font-size:.8rem; font-weight:700; color:var(--gold-deep); letter-spacing:.02em; margin-bottom:10px; display:block;}
   .section-title{font-size:clamp(1.5rem,2.6vw,2.1rem); margin-bottom:14px;}
-  .section-lede{max-width:680px; font-size:1.02rem; margin-bottom:44px;}
+  .section-lede{max-width:720px; font-size:1.02rem; margin-bottom:36px;}
 
   .reveal{opacity:1; transform:translateY(0); transition:opacity .7s ease, transform .7s ease;}
   .reveal.pre{opacity:0; transform:translateY(22px);}
 
-  /* ---------- unified comparison table (replaces duplicate stat boxes) ---------- */
-  .compare-card{
-    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
-    padding:26px 26px 8px; box-shadow:var(--shadow-sm); margin-bottom:28px;
+  /* ---------- mission ---------- */
+  .mission-section{padding-top:6px;}
+  .mission-box{
+    background:var(--forest-tint); border-inline-start:5px solid var(--forest); border-radius:16px;
+    padding:24px 26px; margin-top:20px; box-shadow:var(--shadow-sm);
   }
+  .mission-box .mission-label{font-size:.78rem; font-weight:700; color:var(--forest); margin-bottom:8px; display:block;}
+  .mission-box p{color:var(--ink); font-weight:500;}
+
+  /* ---------- unified comparison table ---------- */
+  .compare-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:26px 26px 8px; box-shadow:var(--shadow-sm); margin-bottom:28px;}
   .compare-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:16px;}
   .compare-head h3{font-size:1.15rem;}
   .compare-table-wrap{overflow-x:auto;}
   table.compare-table{width:100%; border-collapse:collapse; font-size:.94rem;}
-  table.compare-table th, table.compare-table td{padding:13px 14px; text-align:center; white-space:nowrap;}
-  table.compare-table thead th{
-    font-family:'Tajawal',sans-serif; font-weight:700; font-size:.82rem; color:var(--ink-faint);
-    border-bottom:2px solid var(--line);
-  }
+  table.compare-table th, table.compare-table td{padding:13px 14px; text-align:center;}
+  table.compare-table thead th{font-family:'Tajawal',sans-serif; font-weight:700; font-size:.82rem; color:var(--ink-faint); border-bottom:2px solid var(--line);}
   table.compare-table thead th:first-child, table.compare-table td:first-child{text-align:start; white-space:normal;}
   table.compare-table tbody tr{border-bottom:1px solid var(--line);}
   table.compare-table tbody tr:last-child{border-bottom:none;}
@@ -188,19 +181,20 @@
   table.compare-table td.col-q{color:var(--gold-deep); font-weight:700;}
   table.compare-table tr.hl{background:var(--forest-tint);}
   table.compare-table tr.hl td:first-child{font-weight:700; color:var(--forest);}
-  table.compare-table .mini{font-size:.78rem; font-weight:500; color:var(--ink-faint);}
-  .sub-card{
-    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
-    padding:24px 26px; box-shadow:var(--shadow-sm); margin-top:20px; margin-bottom:52px;
-  }
+  table.compare-table .mini{display:block; font-size:.74rem; font-weight:500; color:var(--ink-faint); margin-top:2px;}
+  .sub-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:24px 26px; box-shadow:var(--shadow-sm); margin-top:20px; margin-bottom:24px;}
   .sub-card h4{font-size:1rem; color:var(--forest); margin-bottom:14px; font-family:'Tajawal',sans-serif; font-weight:700;}
   table.sub-table td:first-child{font-weight:600;}
 
-  /* ---------- chart ---------- */
-  .chart-card{
-    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
-    padding:30px 28px; box-shadow:var(--shadow-sm); margin-bottom:36px;
+  .summary-callout{
+    background:linear-gradient(135deg, var(--forest) 0%, #0E5B3E 100%); color:#F3EFDF; border-radius:var(--radius);
+    padding:26px 28px; margin-top:8px; box-shadow:var(--shadow-lg);
   }
+  .summary-callout p{color:#DCE8DF; margin:0;}
+  .summary-callout strong{color:#F6D98C;}
+
+  /* ---------- chart ---------- */
+  .chart-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:30px 28px; box-shadow:var(--shadow-sm); margin-bottom:36px;}
   .chart-head{display:flex; flex-wrap:wrap; align-items:baseline; justify-content:space-between; gap:12px; margin-bottom:6px;}
   .chart-head h3{font-size:1.15rem;}
   .legend{display:flex; gap:18px; flex-wrap:wrap; font-size:.85rem; color:var(--ink-soft);}
@@ -210,15 +204,11 @@
   .bar-val{font-family:'El Messiri',sans-serif; font-weight:700; font-size:12.5px; fill:var(--ink);}
   .axis-label{font-size:12px; fill:var(--ink-faint); font-family:'Tajawal',sans-serif;}
   .gridline{stroke:var(--line); stroke-width:1;}
-  .chart-tip{
-    position:absolute; pointer-events:none; background:var(--forest); color:#fff;
-    font-size:.78rem; padding:6px 10px; border-radius:8px; transform:translate(-50%,-115%);
-    opacity:0; transition:opacity .12s ease; white-space:nowrap; z-index:5;
-  }
+  .chart-tip{position:absolute; pointer-events:none; background:var(--forest); color:#fff; font-size:.78rem; padding:6px 10px; border-radius:8px; transform:translate(-50%,-115%); opacity:0; transition:opacity .12s ease; white-space:nowrap; z-index:5;}
   .chart-wrap{position:relative;}
 
-  /* ---------- distribution (single merged card, two rows, one shared legend) ---------- */
-  .dist-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:26px 26px 22px; box-shadow:var(--shadow-sm);}
+  /* ---------- distribution ---------- */
+  .dist-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:26px 26px 22px; box-shadow:var(--shadow-sm); margin-bottom:24px;}
   .dist-card h4{font-size:1rem; color:var(--forest); margin-bottom:18px; font-family:'Tajawal',sans-serif; font-weight:700;}
   .dist-row{display:flex; align-items:center; gap:16px; margin-bottom:14px;}
   .dist-row-label{flex:none; width:72px; font-size:.85rem; font-weight:700; color:var(--ink);}
@@ -227,18 +217,10 @@
   .dist-legend{display:flex; flex-wrap:wrap; gap:12px 18px; font-size:.78rem; color:var(--ink-soft); margin-top:6px; padding-top:14px; border-top:1px solid var(--line);}
   .dist-legend span{display:inline-flex; align-items:center; gap:6px;}
 
-  /* ---------- team (internal committees & fieldwork roles) ---------- */
-  .process-strip{
-    display:flex; flex-wrap:wrap; gap:0; margin-bottom:40px;
-    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
-    box-shadow:var(--shadow-sm); padding:22px 26px;
-  }
+  /* ---------- team ---------- */
+  .process-strip{display:flex; flex-wrap:wrap; gap:0; margin-bottom:36px; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); box-shadow:var(--shadow-sm); padding:22px 26px;}
   .process-step{display:flex; align-items:flex-start; gap:12px; flex:1 1 220px; padding:6px 14px;}
-  .process-step .p-num{
-    flex:none; width:30px; height:30px; border-radius:50%; background:var(--forest); color:#fff;
-    display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.85rem;
-    font-family:'El Messiri',sans-serif;
-  }
+  .process-step .p-num{flex:none; width:30px; height:30px; border-radius:50%; background:var(--forest); color:#fff; display:flex; align-items:center; justify-content:center; font-weight:700; font-size:.85rem; font-family:'El Messiri',sans-serif;}
   .process-step p{font-size:.86rem; color:var(--ink-soft); line-height:1.6;}
   .process-step p b{color:var(--forest); display:block; font-size:.88rem; margin-bottom:2px;}
   .process-arrow{flex:none; align-self:center; color:var(--line); font-size:1.2rem; padding:0 4px;}
@@ -250,43 +232,50 @@
   .role-subhead{font-size:1.02rem; color:var(--forest); font-family:'Tajawal',sans-serif; font-weight:700; margin:34px 0 16px;}
   .role-grid-2{display:grid; grid-template-columns:repeat(2,1fr); gap:16px;}
   @media (max-width:700px){.role-grid-2{grid-template-columns:1fr;}}
-  .role-card{
-    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
-    padding:22px 20px; box-shadow:var(--shadow-sm);
-  }
-  .role-card .role-icon{
-    width:40px; height:40px; border-radius:12px; background:var(--forest-tint); color:var(--forest);
-    display:flex; align-items:center; justify-content:center; font-size:1.05rem; margin-bottom:14px;
-  }
+  .role-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:22px 20px; box-shadow:var(--shadow-sm);}
+  .role-card .role-icon{width:40px; height:40px; border-radius:12px; background:var(--forest-tint); color:var(--forest); display:flex; align-items:center; justify-content:center; font-size:1.05rem; margin-bottom:14px;}
   .role-card.accent .role-icon{background:var(--gold-tint); color:var(--gold-deep);}
   .role-card h4{font-size:1rem; color:var(--forest); margin-bottom:8px; font-family:'Tajawal',sans-serif; font-weight:700;}
   .role-card.accent h4{color:var(--gold-deep);}
   .role-card p{font-size:.86rem; line-height:1.75;}
 
+  .bullet-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:10px;}
+  .bullet-list li{display:flex; gap:9px; align-items:flex-start; font-size:.86rem; color:var(--ink-soft); line-height:1.75;}
+  .bullet-list li::before{content:'◆'; color:var(--gold); font-size:.55rem; margin-top:7px; flex:none;}
+  .methods-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:24px 26px; box-shadow:var(--shadow-sm); margin-top:28px;}
+  .methods-card h4{font-size:1rem; color:var(--forest); margin-bottom:14px; font-family:'Tajawal',sans-serif; font-weight:700;}
+
+  /* ---------- challenges table ---------- */
+  .challenge-table-wrap{overflow-x:auto;}
+  table.challenge-table{width:100%; border-collapse:collapse; font-size:.9rem; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); overflow:hidden; box-shadow:var(--shadow-sm);}
+  table.challenge-table thead th{background:var(--forest); color:#fff; font-family:'Tajawal',sans-serif; font-weight:700; font-size:.85rem; padding:14px 18px; text-align:start;}
+  table.challenge-table tbody td{padding:16px 18px; border-bottom:1px solid var(--line); vertical-align:top; line-height:1.8; color:var(--ink-soft);}
+  table.challenge-table tbody tr:last-child td{border-bottom:none;}
+  table.challenge-table tbody td:first-child{color:var(--ink); font-weight:600; width:42%;}
+  table.challenge-table tbody td:last-child{color:var(--forest-2); font-weight:600;}
+
+  /* ---------- dual paths ---------- */
+  .path-grid{display:grid; grid-template-columns:repeat(2,1fr); gap:18px; margin-bottom:18px;}
+  @media (max-width:840px){.path-grid{grid-template-columns:1fr;}}
+  .path-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:24px 24px; box-shadow:var(--shadow-sm);}
+  .path-tag{display:inline-block; font-size:.75rem; font-weight:700; padding:5px 12px; border-radius:999px; margin-bottom:14px;}
+  .path-card.remedial .path-tag{background:var(--forest-tint); color:var(--forest);}
+  .path-card.enrich .path-tag{background:var(--gold-tint); color:var(--gold-deep);}
+  .path-card h4{font-size:1.02rem; margin-bottom:14px; color:var(--forest); font-family:'Tajawal',sans-serif; font-weight:700;}
+  .path-card.enrich h4{color:var(--gold-deep);}
+
   /* ---------- story ---------- */
   .story-grid{display:grid; grid-template-columns:1.05fr .95fr; gap:22px; align-items:start;}
   @media (max-width:900px){.story-grid{grid-template-columns:1fr;}}
-  .init-card{
-    background:var(--paper); border:1px solid var(--line); border-radius:var(--radius);
-    padding:30px 28px; box-shadow:var(--shadow-sm);
-  }
-  .init-card .init-tag{
-    display:inline-block; font-size:.78rem; font-weight:700; color:var(--forest);
-    background:var(--forest-tint); padding:5px 12px; border-radius:999px; margin-bottom:14px;
-  }
+  .init-card{background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:30px 28px; box-shadow:var(--shadow-sm);}
+  .init-card .init-tag{display:inline-block; font-size:.78rem; font-weight:700; color:var(--forest); background:var(--forest-tint); padding:5px 12px; border-radius:999px; margin-bottom:14px;}
   .init-card h3{font-size:1.3rem; margin-bottom:12px;}
   .init-card p{margin-bottom:18px;}
 
   .feature-list{display:flex; flex-direction:column; gap:10px;}
   .feature-item{border:1px solid var(--line); border-radius:14px; background:var(--sand); overflow:hidden;}
-  .feature-btn{
-    width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px;
-    background:none; border:none; padding:14px 16px; text-align:right; font-weight:700; color:var(--forest); font-size:.95rem;
-  }
-  .feature-btn .fi-num{
-    display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%;
-    background:var(--forest); color:#fff; font-size:.78rem; margin-inline-end:10px; flex:none;
-  }
+  .feature-btn{width:100%; display:flex; align-items:center; justify-content:space-between; gap:12px; background:none; border:none; padding:14px 16px; text-align:right; font-weight:700; color:var(--forest); font-size:.95rem;}
+  .feature-btn .fi-num{display:inline-flex; align-items:center; justify-content:center; width:26px; height:26px; border-radius:50%; background:var(--forest); color:#fff; font-size:.78rem; margin-inline-end:10px; flex:none;}
   .feature-btn .fi-chevron{transition:transform .25s ease; color:var(--gold-deep); flex:none;}
   .feature-item.open .fi-chevron{transform:rotate(180deg);}
   .feature-body{max-height:0; overflow:hidden; transition:max-height .3s ease;}
@@ -299,18 +288,30 @@
   .raez-tile .r-label{font-size:.76rem; color:var(--ink-soft); margin-top:4px;}
   .raez-tile .r-target{font-size:.7rem; color:var(--ink-faint); margin-top:6px; padding-top:6px; border-top:1px dashed var(--line);}
 
-  .impact-callout{
-    background:linear-gradient(135deg, var(--forest) 0%, #0E5B3E 100%);
-    color:#F3EFDF; border-radius:var(--radius); padding:26px 28px; margin-top:26px;
-    box-shadow:var(--shadow-lg);
-  }
+  .impact-callout{background:linear-gradient(135deg, var(--forest) 0%, #0E5B3E 100%); color:#F3EFDF; border-radius:var(--radius); padding:26px 28px; margin-top:26px; box-shadow:var(--shadow-lg);}
   .impact-callout p{color:#DCE8DF; margin:0;}
   .impact-callout strong{color:#F6D98C;}
 
+  /* ---------- pillars ---------- */
+  .pillars-section{background:linear-gradient(180deg, var(--sand) 0%, var(--sand-deep) 100%);}
+  .pillars-grid{display:grid; grid-template-columns:repeat(4,1fr); gap:18px;}
+  @media (max-width:980px){.pillars-grid{grid-template-columns:repeat(2,1fr);}}
+  @media (max-width:560px){.pillars-grid{grid-template-columns:1fr;}}
+  .pillar-card{position:relative; background:var(--paper); border:1px solid var(--line); border-radius:var(--radius); padding:26px 22px 22px 26px; box-shadow:var(--shadow-sm); overflow:hidden; display:flex; flex-direction:column; gap:12px;}
+  .pillar-card::before{content:''; position:absolute; inset-inline-start:0; top:0; bottom:0; width:6px; background:linear-gradient(180deg, var(--gold) 0%, var(--forest-2) 100%);}
+  .pillar-index{font-family:'El Messiri',sans-serif; font-weight:700; font-size:.78rem; color:var(--gold-deep); letter-spacing:.02em;}
+  .pillar-card h4{font-size:1.02rem; color:var(--forest); font-family:'El Messiri',sans-serif; font-weight:700; line-height:1.4;}
+  .pillar-card p{font-size:.85rem; line-height:1.8;}
+  .pillar-card.wide{grid-column:span 2;}
+  @media (max-width:560px){.pillar-card.wide{grid-column:span 1;}}
+  .pillars-lede-card{background:var(--forest); color:#EAF2EC; border-radius:var(--radius); padding:28px 28px; margin-bottom:26px; box-shadow:var(--shadow-lg); display:flex; flex-wrap:wrap; gap:20px; align-items:center; justify-content:space-between;}
+  .pillars-lede-card p{color:#CFE1D5; max-width:660px; margin:0;}
+  .pillars-lede-card .pl-badge{font-family:'El Messiri',sans-serif; font-weight:700; font-size:1.6rem; color:#F6D98C; background:rgba(255,255,255,.08); border-radius:16px; padding:14px 22px; text-align:center; flex:none;}
+  .pillars-lede-card .pl-badge small{display:block; font-size:.7rem; font-weight:500; color:#CFE1D5; margin-top:4px;}
+  .pillars-close{margin-top:8px;}
+
   /* ---------- footer ---------- */
-  .site-footer{
-    background:var(--forest); color:#E7EFE8; padding:52px 0 34px; margin-top:20px;
-  }
+  .site-footer{background:var(--forest); color:#E7EFE8; padding:52px 0 34px; margin-top:20px;}
   .footer-inner{display:flex; flex-wrap:wrap; justify-content:space-between; gap:28px;}
   .tagline{font-family:'El Messiri',sans-serif; font-size:1.4rem; color:var(--gold-tint); font-weight:600;}
   .signs{display:flex; gap:36px; flex-wrap:wrap;}
@@ -318,39 +319,10 @@
   .sign span{font-size:.82rem; color:#B9CBBD;}
   .footer-note{margin-top:30px; padding-top:20px; border-top:1px solid rgba(255,255,255,.15); font-size:.78rem; color:#9FB6A5;}
 
-  /* ---------- modal ---------- */
-  .modal-overlay{
-    position:fixed; inset:0; background:rgba(12,26,19,.55); backdrop-filter:blur(3px);
-    display:flex; align-items:center; justify-content:center; padding:24px; z-index:200;
-    opacity:0; pointer-events:none; transition:opacity .25s ease;
-  }
-  .modal-overlay.open{opacity:1; pointer-events:auto;}
-  .modal{
-    background:var(--paper); border-radius:22px; max-width:720px; width:100%;
-    max-height:85vh; overflow-y:auto; padding:34px 32px; position:relative;
-    box-shadow:0 40px 80px -20px rgba(0,0,0,.4);
-    transform:translateY(16px) scale(.98); transition:transform .25s ease;
-  }
-  .modal-overlay.open .modal{transform:translateY(0) scale(1);}
-  .modal-close{
-    position:absolute; top:18px; left:18px; width:36px; height:36px; border-radius:50%;
-    border:1px solid var(--line); background:var(--sand); color:var(--forest); font-size:1rem;
-  }
-  .modal h2{font-size:1.4rem; margin-bottom:6px; padding-inline-end:44px;}
-  .modal .modal-sub{margin-bottom:22px; font-size:.92rem;}
-  .recs-list{list-style:none; margin:0; padding:0; display:flex; flex-direction:column; gap:14px;}
-  .recs-list li{
-    display:flex; gap:14px; align-items:flex-start; background:var(--sand);
-    border:1px solid var(--line); border-radius:14px; padding:14px 16px;
-  }
-  .recs-list .r-index{
-    flex:none; width:30px; height:30px; border-radius:50%; background:var(--gold); color:#fff;
-    display:flex; align-items:center; justify-content:center; font-weight:700; font-family:'El Messiri',sans-serif;
-  }
-  .recs-list p{font-size:.92rem; color:var(--ink);}
-
   ::selection{background:var(--gold-tint); color:var(--forest);}
 </style>
+</head>
+<body>
 
 <div id="scrollProgress"></div>
 
@@ -363,9 +335,9 @@
     <nav class="quicknav" id="quicknav">
       <a href="#intro" data-sec="intro">المقدمة</a>
       <a href="#numbers" data-sec="numbers">لغة الأرقام</a>
-      <a href="#team" data-sec="team">فريق العمل</a>
-      <a href="#story" data-sec="story">قصة النجاح</a>
-      <button class="nav-cta" data-open-recs>التوصيات الاستراتيجية</button>
+      <a href="#team" data-sec="team">منهجية العمل</a>
+      <a href="#initiatives" data-sec="initiatives">المبادرات</a>
+      <a href="#pillars" class="nav-cta" data-sec="pillars">التوصيات السبع</a>
     </nav>
     <button class="menu-toggle" id="menuToggle" aria-label="فتح القائمة" aria-expanded="false">☰</button>
   </div>
@@ -388,11 +360,11 @@
       </g>
     </svg>
     <div class="hero-inner">
-      <span class="eyebrow">تجربة الثانوية الخامسة للبنات بسكاكا في تحسين نواتج التعلم في مجال اختبار القدرات العامة والاختبارات التحصيلية</span>
+      <span class="eyebrow">تجربة الثانوية الخامسة للبنات بسكاكا في تحسين نواتج التعلم ورفع مستوى الأداء في اختبار التحصيلي والقدرات العامة</span>
       <h1 class="hero-title">حين تتحول <em>البيانات</em> إلى قرار، والقرار إلى أثر</h1>
-      <p class="hero-sub">قصة الثانوية الخامسة بسكاكا (مسارات) في بناء نموذج قيادة مدرسية مبني على البيانات، حقّق نموًا مضطردًا في نتائج التحصيلي والقدرات، ومركزًا تنافسيًا متقدمًا على مستوى منطقة الجوف والمملكة، وفق مستهدفات رؤية المملكة العربية السعودية 2030.</p>
+      <p class="hero-sub">نموذج عملي وقابل للتعميم يوثّق كيف تحوّلت البيانات الرقمية إلى خطة عمل مؤسسية متكاملة في الثانوية الخامسة بسكاكا (مسارات)، أسهمت في تحسّن متواصل بنتائج التحصيلي والقدرات، ومركز تنافسي متقدم على مستوى منطقة الجوف والمملكة، دعمًا لمستهدفات رؤية المملكة العربية السعودية 2030.</p>
       <div class="meta-row">
-        <span class="meta-chip">مديرة المدرسة: <b>رغدة الزارع</b></span>
+        <span class="meta-chip">مديرة المدرسة: <b>رغدة أنور الزارع</b></span>
         <span class="meta-chip">الرقم الوزاري: <b class="num">M3985137</b></span>
         <span class="meta-chip">العام الدراسي: <b class="num">1447/1448هـ</b></span>
       </div>
@@ -400,17 +372,29 @@
         <div class="teaser"><div class="t-num"><span class="cu num" data-target="70.9" data-decimals="1">70.9</span></div><div class="t-label">متوسط التحصيلي 1447هـ</div></div>
         <div class="teaser"><div class="t-num"><span class="cu num" data-target="69.3" data-decimals="1">69.3</span></div><div class="t-label">متوسط القدرات 1447هـ</div></div>
         <div class="teaser"><div class="t-num"><small>المرتبة</small> <span class="cu num" data-target="1" data-decimals="0">1</span></div><div class="t-label">على إدارة التعليم بالجوف - تحصيلي</div></div>
-        <div class="teaser"><div class="t-num"><span class="cu num" data-target="28" data-decimals="0">28</span>%</div><div class="t-label">نمو تحصيلي عبر منصة رائز المعرفة</div></div>
+        <div class="teaser"><div class="t-num"><span class="cu num" data-target="28" data-decimals="0">28</span>%</div><div class="t-label">نمو تحصيلي فعلي عبر منصة رائز المعرفة</div></div>
       </div>
       <a class="scroll-cue" href="#numbers">استعرض لغة الأرقام <span>↓</span></a>
     </div>
   </section>
 
+  <section class="section mission-section">
+    <div class="wrap">
+      <span class="section-kicker reveal">مقدمة</span>
+      <h2 class="section-title reveal">القيادة المبنية على البيانات</h2>
+      <p class="section-lede reveal" style="margin-bottom:0;">تنطلق هذه الورقة من قناعة راسخة لدى إدارة الثانوية الخامسة للبنات بسكاكا (مسارات) بأن التميز المؤسسي والتعليمي لا يُبنى على الانطباعات أو الاجتهادات الفردية، بل على قراءة دقيقة ومستمرة للبيانات والمؤشرات الرقمية التي توفرها منظومة القياس الوطنية، وفي مقدمتها نتائج اختبار القدرات العامة والاختبارات التحصيلية. ومن هذا المنطلق، تبنّت قيادة المدرسة نهجًا قياديًا يقوم على تحويل البيانات إلى قرار يسهم في تحسين نواتج تعلم الطالبات، بما يدعم مستهدفات رؤية المملكة العربية السعودية 2030 في رفع جودة مخرجات التعليم وتعزيز ثقافة القياس والتقويم المستمر.</p>
+      <div class="mission-box reveal">
+        <span class="mission-label">الرسالة</span>
+        <p>تقديم نموذج عملي وقابل للتعميم يوثّق كيف تحوّلت البيانات الرقمية إلى خطة عمل مؤسسية متكاملة، أسهمت في تحقيق تحسن متواصل في نتائج الاختبارات التحصيلية واختبار القدرات العامة، ومركز متقدم على مستوى مدارس منطقة الجوف والمملكة، بما يعكس تكامل الجهود بين إدارة المدرسة وفريق التحصيل ووحدة دعم التميز المدرسي.</p>
+      </div>
+    </div>
+  </section>
+
   <section id="numbers" class="section numbers-section">
     <div class="wrap">
-      <span class="section-kicker reveal">لغة الأرقام</span>
-      <h2 class="section-title reveal">النتائج والمركز التنافسي لعام 1447/1448هـ</h2>
-      <p class="section-lede reveal">قراءة رقمية موحّدة ومترابطة لأداء طالبات المدرسة في اختباري التحصيلي والقدرات العامة (المسار العلمي)، في جداول مقارنة واحدة بدل التكرار، تُبرز الإنجاز الأبرز في اختبار التحصيلي أولاً.</p>
+      <span class="section-kicker reveal">القراءة التحليلية للنتائج 1447/1448هـ</span>
+      <h2 class="section-title reveal">لغة الأرقام: التحصيلي أولًا، فالقدرات العامة</h2>
+      <p class="section-lede reveal">قراءة رقمية موحّدة ومترابطة لأداء طالبات المدرسة في اختباري التحصيلي والقدرات العامة (المسار العلمي)، تُبرز الإنجاز الأبرز في اختبار التحصيلي أولاً: متوسط <b class="num">70.9</b> درجة، يليه اختبار القدرات العامة بمتوسط <b class="num">69.3</b> درجة.</p>
 
       <div class="compare-card reveal">
         <div class="compare-head">
@@ -431,18 +415,23 @@
               </tr>
               <tr>
                 <td>النمو عن 1446هـ</td>
-                <td class="col-t">▲ <span class="num">0.96</span> نقطة</td>
-                <td class="col-q">▲ <span class="num">1.38</span> نقطة</td>
+                <td class="col-t">▲ نحو نقطة واحدة <span class="mini">إجمالي النمو خلال 4 أعوام: 3.8 درجة</span></td>
+                <td class="col-q">▲ <span class="num">1.3</span> نقطة</td>
               </tr>
               <tr class="hl">
                 <td>الترتيب على إدارة التعليم بالجوف</td>
                 <td class="col-t">المرتبة <span class="cu num" data-target="1" data-decimals="0">1</span> من 63 (100%)</td>
-                <td class="col-q">المرتبة <span class="cu num" data-target="3" data-decimals="0">3</span> من 64 (96.83%)</td>
+                <td class="col-q">المرتبة <span class="cu num" data-target="3" data-decimals="0">3</span> من 64 (أعلى من 96.83%)</td>
               </tr>
               <tr>
                 <td>الترتيب على مستوى المملكة</td>
-                <td class="col-t"><span class="num">467</span> من <span class="num">2328</span> (79.97%)</td>
-                <td class="col-q"><span class="num">601</span> من <span class="num">2335</span> (74.29%)</td>
+                <td class="col-t"><span class="num">467</span> من <span class="num">2328</span> <span class="mini">أعلى من 79.97% من المدارس</span></td>
+                <td class="col-q"><span class="num">601</span> من <span class="num">2335</span> <span class="mini">أعلى من 74.29% من المدارس</span></td>
+              </tr>
+              <tr>
+                <td>نسبة الحاصلات على 65 درجة فأكثر</td>
+                <td class="col-t"><b class="num">62.9%</b> <span class="mini">مقابل 37.1% أقل من 65 درجة</span></td>
+                <td class="col-q"><b class="num">55.5%</b> <span class="mini">مقابل 44.6% أقل من 65 درجة</span></td>
               </tr>
             </tbody>
           </table>
@@ -479,42 +468,46 @@
               <tr>
                 <td>التحصيلي (الأحياء، الرياضيات، الفيزياء، الكيمياء)</td>
                 <td class="col-t"><b class="num">70.86%</b></td>
-                <td><span class="num">60.80%</span></td>
-                <td><span class="num">67.33%</span></td>
+                <td><span class="num">60.80%</span><span class="mini">فارق +10.06</span></td>
+                <td><span class="num">67.33%</span><span class="mini">فارق +3.53</span></td>
               </tr>
               <tr>
                 <td>القدرات (الكمي واللفظي)</td>
                 <td class="col-q"><b class="num">69.34%</b></td>
-                <td><span class="num">61.76%</span></td>
-                <td><span class="num">67.13%</span></td>
+                <td><span class="num">61.76%</span><span class="mini">فارق +7.58</span></td>
+                <td><span class="num">67.13%</span><span class="mini">فارق +2.21</span></td>
               </tr>
             </tbody>
           </table>
         </div>
+      </div>
+
+      <div class="summary-callout reveal">
+        <p><strong>خلاصة القراءة التحليلية:</strong> تؤكد المؤشرات الرقمية لعام 1448/1447هـ تحقيق الثانوية الخامسة بسكاكا تقدمًا في الاختبارات التحصيلية واختبار القدرات العامة، وتسجيلها مراكز متقدمة على مستوى منطقة الجوف والمملكة. كما أظهرت النتائج فرصًا للتحسين لدى الطالبات في المستويين المنخفض والمنخفض جدًا، وهو ما يمثل محور العمل في المرحلة القادمة.</p>
       </div>
     </div>
   </section>
 
   <section id="team" class="section team-section">
     <div class="wrap">
-      <span class="section-kicker reveal">منهجية العمل المؤسسي</span>
-      <h2 class="section-title reveal">جهود فريق العمل ودوره في تحقيق النجاح</h2>
-      <p class="section-lede reveal">لم يكن التحسن المتحقق وليد الصدفة، بل نتاج تكامل داخلي بين اللجان المدرسية وفرق العمل الميداني، من التحليل إلى القرار فالتنفيذ، دون فجوات أو ازدواجية في الأدوار.</p>
+      <span class="section-kicker reveal">قصة النجاح</span>
+      <h2 class="section-title reveal">منهجية العمل المؤسسي</h2>
+      <p class="section-lede reveal">لم يكن التحسن المتحقق في نتائج الاختبارات التحصيلية واختبار القدرات العامة وليد الصدفة، بل ثمرة منهجية عمل مؤسسية واضحة، تقوم على تكامل أدوار اللجنة الإدارية ولجنة التميز ولجنة التحصيل الدراسي، ودور الوكيلات في المتابعة، والموجهة الطلابية في الدعم النفسي والتحفيزي، ومنسقة منصة رائز في تفعيل الخطط العلاجية، إلى جانب جهود المعلمات في تطبيق التوصيات وخطط التحسين.</p>
 
       <div class="process-strip reveal">
         <div class="process-step">
           <span class="p-num">١</span>
-          <p><b>تحليل البطاقة</b>ضمن اجتماع لجنة التحصيلي الدراسي بالمدرسة.</p>
+          <p><b>اللجنة الإدارية</b>تتولى توجيه الأولويات المؤسسية.</p>
         </div>
         <span class="process-arrow">←</span>
         <div class="process-step">
           <span class="p-num">٢</span>
-          <p><b>مناقشة الأولويات</b>في اجتماع لجنة التميز، وتوزيع الأدوار بين اللجان والوكيلات.</p>
+          <p><b>لجنة التميز</b>تتولى تحليل المؤشرات الرقمية.</p>
         </div>
         <span class="process-arrow">←</span>
         <div class="process-step">
           <span class="p-num">٣</span>
-          <p><b>التوثيق والاعتماد</b>في تقرير إجرائي معتمد من مديرة المدرسة.</p>
+          <p><b>لجنة التحصيل الدراسي</b>تُعدّ خطط المعالجة والإثراء.</p>
         </div>
       </div>
 
@@ -522,46 +515,123 @@
         <div class="role-card reveal">
           <div class="role-icon">◆</div>
           <h4>اللجنة الإدارية</h4>
-          <p>القيادة العامة للمدرسة، وتوجيه الأولويات المؤسسية التي تُبنى عليها خطط التحسين.</p>
+          <p>توجيه الأولويات المؤسسية التي تُبنى عليها خطط التحسين على مستوى المدرسة.</p>
         </div>
         <div class="role-card reveal">
           <div class="role-icon">◆</div>
           <h4>لجنة التميز</h4>
-          <p>رصد المؤشرات الرقمية وتحليلها، ومتابعة مسارات الجودة والتحسين المستمر.</p>
+          <p>تحليل المؤشرات الرقمية ومتابعة مسارات الجودة والتحسين المستمر.</p>
         </div>
         <div class="role-card reveal">
           <div class="role-icon">◆</div>
-          <h4>لجنة التحصيلي الدراسي</h4>
-          <p>تحليل نتائج اختباري التحصيلي والقدرات، وتصميم خطط المعالجة والإثراء لكل طالبة.</p>
+          <h4>لجنة التحصيل الدراسي</h4>
+          <p>إعداد خطط المعالجة والإثراء بناءً على تحليل نتائج التحصيلي والقدرات.</p>
         </div>
         <div class="role-card accent reveal">
           <div class="role-icon">◆</div>
           <h4>الوكيلات</h4>
-          <p>ترجمة الخطط إلى إجراءات ميدانية يومية داخل المدرسة، ومتابعة تنفيذها أولًا بأول.</p>
+          <p>متابعة تنفيذ الخطط ميدانيًا داخل المدرسة أولًا بأول.</p>
         </div>
         <div class="role-card accent reveal">
           <div class="role-icon">◆</div>
           <h4>الموجهة الطلابية</h4>
-          <p>الدعم النفسي والتحفيزي للطالبات، وتعزيز دافعيتهن واستقرارهن الانفعالي وقت الاختبار.</p>
+          <p>الدعم النفسي والتحفيزي للطالبات، وتعزيز دافعيتهن تجاه الاختبارين.</p>
         </div>
         <div class="role-card accent reveal">
           <div class="role-icon">◆</div>
           <h4>منسقة منصة رائز</h4>
-          <p>تفعيل الخطط العلاجية الفردية رقميًا عبر المنصة، ومتابعة أثرها التحصيلي أولًا بأول.</p>
+          <p>تفعيل الخطط العلاجية الفردية رقميًا عبر المنصة، ومتابعة أثرها التحصيلي.</p>
         </div>
       </div>
 
-      <h3 class="role-subhead reveal">المعلمات ومنظومة التحفيز والانضباط: رافعتا الاستدامة</h3>
-      <div class="role-grid-2">
-        <div class="role-card accent reveal">
-          <div class="role-icon">◆</div>
-          <h4>المعلمات المعنيّات</h4>
-          <p>التنفيذ اليومي المباشر للخطط العلاجية والإثرائية داخل الفصل وفق نتائج كل طالبة، عبر تفعيل مجتمعات التعلم المهنية ومشروع تحسين التدريس (الزيارات الصفية التبادلية والتغذية الراجعة الفورية بين المعلمات)، وهو الجهد الذي انعكس مباشرة تحسنًا ملموسًا في نتائج التحصيلي والقدرات.</p>
+      <h3 class="role-subhead reveal">تكامل اللجان الداخلية وفرق العمل الميداني</h3>
+      <p class="reveal" style="max-width:760px; margin-bottom:16px;">يقوم العمل على تكامل الأدوار؛ إذ تتولى اللجنة الإدارية توجيه الأولويات، ولجنة التميز تحليل المؤشرات، ولجنة التحصيل الدراسي إعداد خطط المعالجة والإثراء، وتتابع الوكيلات التنفيذ، وتدعم الموجهة الطلابية دافعية الطالبات، فيما تتولى منسقة منصة رائز تفعيل الخطط العلاجية ومتابعة أثرها. وقد أسهمت جهود المعلمات في تطبيق هذه التوصيات وخطط التحسين داخل الفصول مباشرة.</p>
+
+      <div class="methods-card reveal">
+        <h4>الوسائل المعتمدة في التحليل والمتابعة</h4>
+        <ul class="bullet-list">
+          <li>اجتماعات فرق العمل واللجان التعليمية لمناقشة النتائج أولًا بأول.</li>
+          <li>تقارير نتائج اختبار القدرات العامة والاختبارات التحصيلية الصادرة عن منصة تميز الرقمية.</li>
+          <li>الجداول الإحصائية والرسوم البيانية لتتبع تطور الأداء.</li>
+          <li>العروض التقديمية لمشاركة النتائج والتوصيات مع فرق العمل.</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+
+  <section id="challenges" class="section challenges-section">
+    <div class="wrap">
+      <span class="section-kicker reveal">من التحدي إلى المعالجة</span>
+      <h2 class="section-title reveal">التحديات المرصودة وآلية التعامل معها</h2>
+      <p class="section-lede reveal">رصد فريق العمل ثلاثة تحديات رئيسة، ووضع لكل منها آلية معالجة محددة؛ أسهمت في تحسين مؤشرات الأداء مع استمرار المتابعة الدورية وقياس أثر الإجراءات المنفذة.</p>
+      <div class="challenge-table-wrap reveal">
+        <table class="challenge-table">
+          <thead><tr><th>التحدي المرصود</th><th>آلية المعالجة المعتمدة</th></tr></thead>
+          <tbody>
+            <tr>
+              <td>ضعف دافعية بعض الطالبات تجاه اختباري القدرات والتحصيلي</td>
+              <td>تنفيذ برامج التحفيز والتكريم ونشر ثقافة التميز</td>
+            </tr>
+            <tr>
+              <td>ضعف مهارات القراءة والفهم والتحليل لدى بعض الطالبات</td>
+              <td>تنفيذ برامج علاجية موجهة وفق نتائج كل طالبة</td>
+            </tr>
+            <tr>
+              <td>الحاجة إلى تدريب مستمر للطالبات على أنماط الاختبارات</td>
+              <td>تفعيل المنصات الرقمية وتبادل الخبرات بين المعلمات</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>
+
+  <section id="initiatives" class="section initiatives-section">
+    <div class="wrap">
+      <span class="section-kicker reveal">المبادرات النوعية</span>
+      <h2 class="section-title reveal">من التحليل إلى المعالجة والإثراء</h2>
+      <p class="section-lede reveal">بُنيت المبادرات على نتائج التحليل ضمن مسارين متكاملين: مسار علاجي للفئات الأقل أداءً، ومسار إثرائي لتعزيز تفوق الفئات الأعلى أداءً.</p>
+
+      <div class="path-grid">
+        <div class="path-card remedial reveal">
+          <span class="path-tag">المسار العلاجي</span>
+          <h4>معالجة فجوات الأداء</h4>
+          <ul class="bullet-list">
+            <li>إعطاء الأولوية للطالبات في المستويين المنخفض والمنخفض جدًا، من خلال خطط علاجية فردية مبنية على نتائج كل طالبة.</li>
+            <li>تنفيذ برامج تستهدف رفع نسبة الطالبات الحاصلات على 65 درجة فأكثر في الاختبارات التحصيلية واختبار القدرات العامة.</li>
+            <li>التركيز على المهارات والمعايير منخفضة الإتقان، وفق تحليل المجالات العلمية في التحصيلي، والمجالين الكمي واللفظي في القدرات.</li>
+            <li>تعزيز مهارات القراءة والفهم والتحليل باعتبارها مهارات مشتركة بين الاختبارين.</li>
+          </ul>
         </div>
-        <div class="role-card reveal">
-          <div class="role-icon">◆</div>
+        <div class="path-card enrich reveal">
+          <span class="path-tag">المسار الإثرائي</span>
+          <h4>تحويل التميز إلى تفوق</h4>
+          <ul class="bullet-list">
+            <li>تبادل الخبرات والممارسات التدريسية الناجحة بين المعلمات لتعميم أفضل الأساليب.</li>
+            <li>تنفيذ برامج إثرائية للطالبات في المستوى المرتفع؛ لتحويل الأداء المرتفع إلى أداء متفوق ورفع سقف التوقعات.</li>
+            <li>الاستفادة من منصة رائز والمنصات التعليمية الرقمية الداعمة للاستعداد للاختبارات الوطنية.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="path-grid">
+        <div class="path-card remedial reveal">
+          <span class="path-tag">تطوير مهني مستدام</span>
+          <h4>مجتمعات التعلم المهنية ومشروع تحسين التدريس</h4>
+          <ul class="bullet-list">
+            <li>تفعيل مجتمعات التعلم المهنية أسبوعيًا لتحليل نتائج التطبيقات الصفية وتبادل استراتيجيات المعالجة الناجحة.</li>
+            <li>تطبيق مشروع تحسين التدريس من خلال الزيارات الصفية التبادلية والتغذية الراجعة الفورية، وربط الممارسات الصفية بمؤشرات الأداء الرقمية.</li>
+          </ul>
+        </div>
+        <div class="path-card enrich reveal">
+          <span class="path-tag">التحفيز والانضباط</span>
           <h4>التحفيز المستدام والانضباط المدرسي</h4>
-          <p>منظومة تحفيز مستدامة مرتبطة بمؤشرات الأداء الفردي والجماعي للطالبات، مقترنة بانضباط مدرسي واضح المعايير (الانتظام، الجدية، إدارة الوقت الصفي)، شكّلت معًا البيئة الداعمة التي مكّنت الخطط العلاجية والإثرائية من تحقيق أثرها الفعلي في تقدّم النتائج.</p>
+          <ul class="bullet-list">
+            <li>ترسيخ منظومة تحفيز مستدامة مرتبطة بمؤشرات الأداء الفردي والجماعي للطالبات؛ لنشر ثقافة التميز.</li>
+            <li>تعزيز الانضباط والجدية وإدارة الوقت الصفي بوصفها عوامل داعمة لنجاح البرامج العلاجية والإثرائية.</li>
+            <li>عقد اجتماعات دورية للجنة التميز ولجنة التحصيل الدراسي لمتابعة أثر البرامج المنفذة أولًا بأول.</li>
+            <li>اعتماد مؤشرات ثابتة للمتابعة: متوسط المدرسة، ومعدل التغير السنوي، ونسبتا المستويين المرتفع والمنخفض جدًا، ونسبة الحاصلات على 65 درجة فأكثر.</li>
+          </ul>
         </div>
       </div>
     </div>
@@ -570,30 +640,30 @@
   <section id="story" class="section story-section">
     <div class="wrap">
       <span class="section-kicker reveal">هندسة الأثر الميداني</span>
-      <h2 class="section-title reveal">قصة النجاح والمبادرات</h2>
-      <p class="section-lede reveal">من التحليل الرقمي إلى الممارسة اليومية داخل الصف: مبادرة ميدانية تشاركية، وتوظيف رقمي حوّل البيانات إلى أثر تحصيلي مقاس.</p>
+      <h2 class="section-title reveal">مبادرة "بصمة نجاح" ومنصة "رائز المعرفة"</h2>
+      <p class="section-lede reveal">امتد توظيف البيانات من التخطيط إلى الميدان، من خلال مبادرة بصمة نجاح ومنصة رائز المعرفة؛ لتحويل نتائج التحليل إلى إجراءات صفية قابلة للمتابعة والقياس.</p>
 
       <div class="story-grid">
         <div class="init-card reveal">
           <span class="init-tag">مبادرة ميدانية</span>
           <h3>بصمة نجاح</h3>
-          <p>ذراع تنفيذية ميدانية ترجمت نتائج التحليل إلى ممارسات يومية داخل الصف، عبر حزمة من الحلول الابتكارية جمعت بين البعدين المعرفي والنفسي في إعداد الطالبة للاختبار. اضغطي على كل عنصر لعرض تفاصيله:</p>
+          <p>حوّلت المبادرة نتائج التحليل إلى ممارسات صفية يومية تجمع بين الإعداد المعرفي والنفسي للطالبة. اضغطي على كل عنصر لعرض تفاصيله:</p>
           <div class="feature-list" id="featureList">
             <div class="feature-item">
               <button class="feature-btn"><span><span class="fi-num">١</span>التدريب الموجّه بالبيانات</span><span class="fi-chevron">˅</span></button>
-              <div class="feature-body"><p>بناء الحصص التقويمية والعلاجية على نتائج كل طالبة ومهاراتها الفرعية تحديدًا، بدلًا من التدريب الجماعي العام غير الموجّه.</p></div>
+              <div class="feature-body"><p>بناء حصص تقويمية وعلاجية وفق نتائج كل طالبة ومهاراتها منخفضة الإتقان.</p></div>
             </div>
             <div class="feature-item">
               <button class="feature-btn"><span><span class="fi-num">٢</span>استراتيجية المعلم البديل</span><span class="fi-chevron">˅</span></button>
-              <div class="feature-body"><p>تناوب مقصود بين المعلمات على تدريس المهارة الواحدة، بما يتيح للطالبة زاوية شرح مختلفة تعالج فجوتها من مسار جديد.</p></div>
+              <div class="feature-body"><p>تناوب المعلمات في تدريس المهارة الواحدة؛ لتقديم أساليب شرح متنوعة.</p></div>
             </div>
             <div class="feature-item">
               <button class="feature-btn"><span><span class="fi-num">٣</span>المحاكاة الواقعية للاختبارات</span><span class="fi-chevron">˅</span></button>
-              <div class="feature-body"><p>تطبيق اختبارات محاكية لظروف الاختبار الفعلي زمنًا ونمط أسئلة وبيئة قاعة، لرفع جاهزية الطالبات الفعلية لا النظرية فقط.</p></div>
+              <div class="feature-body"><p>تطبيق اختبارات تحاكي زمن الاختبار الفعلي ونمط أسئلته وبيئته.</p></div>
             </div>
             <div class="feature-item">
               <button class="feature-btn"><span><span class="fi-num">٤</span>اللياقة النفسية</span><span class="fi-chevron">˅</span></button>
-              <div class="feature-body"><p>برامج موجّهة لتعزيز الثبات الانفعالي وإدارة قلق الاختبار، بما ينعكس أداءً مستقرًا وقت التطبيق الفعلي.</p></div>
+              <div class="feature-body"><p>تنفيذ برامج لتعزيز الثبات الانفعالي وإدارة قلق الاختبار.</p></div>
             </div>
           </div>
         </div>
@@ -601,27 +671,83 @@
         <div class="init-card reveal">
           <span class="init-tag">توظيف رقمي</span>
           <h3>منصة رائز المعرفة</h3>
-          <p>أداة تحليلية رقمية حوّلت نتائج التحصيلي والقدرات إلى خطط علاجية فردية دقيقة لكل طالبة، فأثمر هذا التوظيف أثرًا تحصيليًا فعليًا تجاوز المستهدف المعتمد.</p>
+          <p>وظّفت المدرسة منصة رائز المعرفة لتحليل نتائج الاختبارات، وبناء خطط علاجية فردية للطالبات، ومتابعة أثرها من خلال مؤشرات رقمية واضحة.</p>
           <div class="raez-stats">
             <div class="raez-tile">
               <div class="r-num"><span class="cu num" data-target="28" data-decimals="0">28</span>%</div>
               <div class="r-label">نمو تحصيلي فعلي</div>
-              <div class="r-target">تجاوز المستهدف المعتمد (20%)</div>
+              <div class="r-target">تجاوز المستهدف (20%)</div>
             </div>
             <div class="raez-tile">
               <div class="r-num">↓<span class="cu num" data-target="30" data-decimals="0">30</span>%</div>
               <div class="r-label">انخفاض زمن الإجابة</div>
-              <div class="r-target">مؤشر تحسّن الطلاقة المهارية</div>
+              <div class="r-target">نتيجة تحسّن الطلاقة المهارية</div>
             </div>
           </div>
+          <p style="margin-bottom:18px;">كما ارتفع التفاعل الرقمي للطالبات خلال التطبيق، بما يعكس زيادة مشاركتهن الذاتية في متابعة خططهن العلاجية الفردية.</p>
           <div class="impact-callout">
-            <p>سجّلت مؤشرات التفاعل الرقمي للطالبات مع محتوى المنصة <strong>ارتفاعًا ملحوظًا</strong> خلال فترة التطبيق، وانخفض زمن الإجابة نتيجة تحسّن <strong>الطلاقة المهارية</strong> وسرعة الاسترجاع المعرفي، لا على حساب الدقة.</p>
+            <p>تؤكد النتائج أن تكامل العمل التشاركي مع التحليل الرقمي أسهم في تحقيق أثر تحصيلي <strong>تجاوز المستهدف</strong>، وقدّم <strong>نموذجًا إجرائيًا</strong> قابلًا للتطبيق في مدارس المنطقة.</p>
           </div>
         </div>
       </div>
 
       <div class="reveal" style="text-align:center; margin-top:44px;">
-        <button class="nav-cta" data-open-recs style="padding:14px 30px; font-size:.95rem;">عرض التوصيات الاستراتيجية القابلة للتعميم ←</button>
+        <a href="#pillars" class="nav-cta" style="padding:14px 30px; font-size:.95rem;">عرض التوصيات الاستراتيجية القابلة للتعميم ←</a>
+      </div>
+    </div>
+  </section>
+
+  <section id="pillars" class="section pillars-section">
+    <div class="wrap">
+      <span class="section-kicker reveal">أعمدة الأثر المؤسسي</span>
+      <h2 class="section-title reveal">التوصيات الاستراتيجية القابلة للتعميم</h2>
+      <p class="section-lede reveal">استنادًا إلى تجربة الثانوية الخامسة بسكاكا، تقترح إدارة المدرسة التوصيات الآتية؛ لتعزيز ثقافة القيادة المبنية على البيانات في مدارس المنطقة:</p>
+
+      <div class="pillars-lede-card reveal">
+        <p>سبع توصيات عملية وميدانية، تنقل الممارسة الناجحة من حالة فردية إلى نموذج مؤسسي قابل للتكرار في أي مدرسة بمنطقة الجوف.</p>
+        <div class="pl-badge">٧<small>توصيات استراتيجية</small></div>
+      </div>
+
+      <div class="pillars-grid">
+        <div class="pillar-card reveal">
+          <span class="pillar-index">التوصية الأولى</span>
+          <h4>التحليل الدوري المؤسسي</h4>
+          <p>اعتماد تحليل دوري لنتائج الاختبارات التحصيلية واختبار القدرات العامة ضمن اجتماعات لجنة التميز ولجنة التحصيل الدراسي، وعدم الاكتفاء بالتحليل بعد صدور النتائج.</p>
+        </div>
+        <div class="pillar-card reveal">
+          <span class="pillar-index">التوصية الثانية</span>
+          <h4>تحليل المهارات الفرعية</h4>
+          <p>تحليل المجالات والمهارات الفرعية في كل اختبار، وعدم الاكتفاء بالمتوسط العام؛ لبناء خطط علاجية وإثرائية دقيقة.</p>
+        </div>
+        <div class="pillar-card reveal">
+          <span class="pillar-index">التوصية الثالثة</span>
+          <h4>مجتمعات التعلم المهنية</h4>
+          <p>ربط مجتمعات التعلم المهنية بمشروع تحسين التدريس، من خلال الزيارات الصفية التبادلية والتغذية الراجعة وتبادل الممارسات الناجحة.</p>
+        </div>
+        <div class="pillar-card reveal">
+          <span class="pillar-index">التوصية الرابعة</span>
+          <h4>مساران متكاملان</h4>
+          <p>اعتماد مسارين متكاملين: مسار علاجي فردي للطالبات في المستويين المنخفض والمنخفض جدًا، ومسار إثرائي للطالبات في المستوى المرتفع.</p>
+        </div>
+        <div class="pillar-card reveal">
+          <span class="pillar-index">التوصية الخامسة</span>
+          <h4>هدف سنوي ومؤشر أداء رئيس</h4>
+          <p>وضع هدف سنوي لرفع نسبة الطالبات الحاصلات على 65 درجة فأكثر في الاختبارين، واعتماده مؤشر أداء رئيسًا.</p>
+        </div>
+        <div class="pillar-card reveal">
+          <span class="pillar-index">التوصية السادسة</span>
+          <h4>ربط التحفيز بالانضباط</h4>
+          <p>ربط التحفيز بمؤشرات الأداء والانضباط والجدية وإدارة الوقت الصفي؛ لبناء بيئة مدرسية آمنة وداعمة للتعلم.</p>
+        </div>
+        <div class="pillar-card wide reveal">
+          <span class="pillar-index">التوصية السابعة</span>
+          <h4>المنصات الرقمية ولوحة المؤشرات</h4>
+          <p>تفعيل منصة رائز المعرفة والمنصات الرقمية الداعمة، مع اعتماد لوحة مؤشرات تشمل متوسط المدرسة، ومعدل التغير السنوي، وتوزيع مستويات الأداء، ونسبة الطالبات الحاصلات على 65 درجة فأكثر.</p>
+        </div>
+      </div>
+
+      <div class="summary-callout reveal pillars-close">
+        <p>تقدّم الثانوية الخامسة بسكاكا تجربتها بوصفها <strong>نموذجًا قابلًا للتطبيق</strong> في مدارس المنطقة، وتؤكد استعدادها لتبادل الخبرات؛ دعمًا لجودة التعليم وإسهامًا في تحقيق مستهدفات برنامج تنمية القدرات البشرية في رؤية المملكة العربية السعودية 2030.</p>
       </div>
     </div>
   </section>
@@ -640,29 +766,11 @@
   </footer>
 </main>
 
-<div class="modal-overlay" id="recsOverlay">
-  <div class="modal" role="dialog" aria-modal="true" aria-labelledby="recsTitle" tabindex="-1">
-    <button class="modal-close" id="closeRecs" aria-label="إغلاق">✕</button>
-    <h2 id="recsTitle">التوصيات الاستراتيجية القابلة للتعميم</h2>
-    <p class="modal-sub">مقترحة للتعميم على مدارس منطقة الجوف، استنادًا إلى نموذج العمل المطبَّق في الثانوية الخامسة بسكاكا.</p>
-    <ol class="recs-list">
-      <li><span class="r-index num">1</span><p>اعتماد آلية دورية ثابتة لتحليل بطاقتي التحصيلي والقدرات ضمن اجتماعات اللجان الداخلية (لجنة التميز ولجنة التحصيلي الدراسي)، بدلًا من الاكتفاء بالتحليل بعد صدور النتائج فقط.</p></li>
-      <li><span class="r-index num">2</span><p>الانتقال من قراءة المتوسط العام إلى تحليل المجالات والمهارات الفرعية في كل اختبار، باعتباره الأساس العلمي لبناء خطط معالجة وإثراء دقيقة وموجّهة.</p></li>
-      <li><span class="r-index num">3</span><p>تفعيل مجتمعات التعلم المهنية بين المعلمات ودمجها بمشروع تحسين التدريس، عبر الزيارات الصفية التبادلية والتغذية الراجعة الفورية، كإطار دائم لتبادل الممارسات الناجحة ومعالجة الفجوات التدريسية المشتركة أولًا بأول.</p></li>
-      <li><span class="r-index num">4</span><p>تصميم مسارين متوازيين وواضحين في كل مدرسة: مسار علاجي فردي للطالبات في المستويين المنخفض والمنخفض جدًا وفق نتائج كل طالبة، ومسار إثرائي للطالبات في المستوى المرتفع لتحويل التميز إلى تفوق.</p></li>
-      <li><span class="r-index num">5</span><p>تبني هدف مؤسسي صريح لرفع نسبة الطالبات المتجاوزات لمتوسط الاختبار العام في كلا الاختبارين، واعتماده كمؤشر أداء رئيس يُتابَع سنويًا.</p></li>
-      <li><span class="r-index num">6</span><p>ترسيخ منظومة تحفيز مستدامة مقترنة بانضباط مدرسي واضح المعايير، بحيث تشكّل البيئة الصفية المنظمة والآمنة رافعة داعمة للأداء الأكاديمي لا مجرد حوافز لحظية.</p></li>
-      <li><span class="r-index num">7</span><p>تعميم توظيف منصة رائز المعرفة والمنصات الرقمية المساندة في الاستعداد للاختبارات الوطنية، مع اعتماد لوحة مؤشرات كمية ثابتة (متوسط المدرسة، معدل التغير السنوي، نسبة المستوى المرتفع، نسبة المستوى المنخفض جدًا، ونسبة الطالبات فوق متوسط الاختبار) لمتابعة الأثر بموضوعية واستمرار.</p></li>
-    </ol>
-  </div>
-</div>
-
 <script>
 (function(){
   "use strict";
   var reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
 
-  /* ---------- scroll progress ---------- */
   var progressEl = document.getElementById('scrollProgress');
   function onScroll(){
     var h = document.documentElement;
@@ -672,7 +780,6 @@
   document.addEventListener('scroll', onScroll, {passive:true});
   onScroll();
 
-  /* ---------- active nav link ---------- */
   var navLinks = Array.prototype.slice.call(document.querySelectorAll('.quicknav a'));
   var sections = navLinks.map(function(a){ return document.getElementById(a.dataset.sec); });
   function updateActive(){
@@ -684,12 +791,6 @@
   document.addEventListener('scroll', updateActive, {passive:true});
   updateActive();
 
-  /* ---------- entrance animation on load ----------
-     Every .reveal/.teaser is fully visible by CSS default (correct at rest,
-     with or without JS). When JS runs, we briefly flip to a "pre" (hidden)
-     state and immediately transition back to visible, staggered slightly -
-     a one-time on-load flourish, never gated behind scrolling/observers, so
-     nothing depends on the viewer scrolling to ever see real content. */
   if(!reduceMotion){
     var revealEls = Array.prototype.slice.call(document.querySelectorAll('.reveal, .teaser'));
     revealEls.forEach(function(el){ el.classList.add('pre'); });
@@ -702,12 +803,6 @@
     });
   }
 
-  /* ---------- number emphasis on load ----------
-     The figures are printed correct and final in the markup - never "0",
-     never mutated by script - so they are right in every case: JS disabled,
-     a static capture, a slow connection, or a link-preview bot. JS only adds
-     a brief, non-mutating scale/opacity pop for polish; the digits themselves
-     never change. */
   if(!reduceMotion){
     var counters = Array.prototype.slice.call(document.querySelectorAll('.cu'));
     counters.forEach(function(c){ c.classList.add('num-pop'); });
@@ -716,7 +811,6 @@
     });
   }
 
-  /* ---------- feature accordion ---------- */
   document.querySelectorAll('.feature-item').forEach(function(item){
     var btn = item.querySelector('.feature-btn');
     btn.addEventListener('click', function(){
@@ -726,27 +820,6 @@
     });
   });
 
-  /* ---------- recommendations modal ---------- */
-  var overlay = document.getElementById('recsOverlay');
-  var closeBtn = document.getElementById('closeRecs');
-  var lastFocused = null;
-  function openModal(){
-    lastFocused = document.activeElement;
-    overlay.classList.add('open');
-    overlay.querySelector('.modal').focus();
-    document.body.style.overflow = 'hidden';
-  }
-  function closeModal(){
-    overlay.classList.remove('open');
-    document.body.style.overflow = '';
-    if(lastFocused) lastFocused.focus();
-  }
-  document.querySelectorAll('[data-open-recs]').forEach(function(b){ b.addEventListener('click', openModal); });
-  closeBtn.addEventListener('click', closeModal);
-  overlay.addEventListener('click', function(e){ if(e.target === overlay) closeModal(); });
-  document.addEventListener('keydown', function(e){ if(e.key === 'Escape' && overlay.classList.contains('open')) closeModal(); });
-
-  /* ---------- mobile menu (simple toggle reveal of nav as column) ---------- */
   var menuToggle = document.getElementById('menuToggle');
   var quicknav = document.getElementById('quicknav');
   menuToggle.addEventListener('click', function(){
@@ -768,7 +841,6 @@
     }
   });
 
-  /* ---------- trend chart (SVG bar chart, 2 series x 4 years) ---------- */
   var YEARS = ['1444هـ','1445هـ','1446هـ','1447هـ'];
   var TAHSILI = [67.1, 68.3, 69.9, 70.9];
   var QUDURAT = [68.6, 67.6, 68.0, 69.3];
@@ -796,7 +868,6 @@
     svg.innerHTML = '';
     svg.setAttribute('viewBox', '0 0 ' + W + ' ' + H);
 
-    /* gridlines + y labels */
     var steps = 4;
     for(var i=0;i<=steps;i++){
       var v = yMin + (yMax - yMin) * (i/steps);
@@ -807,7 +878,6 @@
       svg.appendChild(lab);
     }
 
-    /* bars */
     YEARS.forEach(function(year, i){
       var gx = padL + i*groupW + groupW/2;
       var xT = gx - barW - 4;
@@ -836,9 +906,6 @@
       });
     });
 
-    /* Grow the bars on load - never gated behind scrolling into view, so the
-       chart always settles to its correct final state within a second of
-       the page loading, whatever the scroll position. */
     var rects = svg.querySelectorAll('rect');
     function animateBars(){
       rects.forEach(function(r, idx){
@@ -870,7 +937,6 @@
 
   buildChart();
 
-  /* ---------- distribution bars ---------- */
   var LEVELS = [
     {key:'high', label:'مرتفع (75 فأكثر)', color:'#1E8449'},
     {key:'med', label:'متوسط (65 - أقل من 75)', color:'#2E86C1'},
@@ -909,3 +975,5 @@
 
 })();
 </script>
+</body>
+</html>
